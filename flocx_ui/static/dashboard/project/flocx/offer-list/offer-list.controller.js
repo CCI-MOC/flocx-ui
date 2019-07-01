@@ -7,7 +7,7 @@
 
   FlocxOfferListController.$inject = [ '$http' ];
 
-  function FlocxOfferListController(_$http) {
+  function FlocxOfferListController() {
     var ctrl = this;
 
     ctrl.items = [

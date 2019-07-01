@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- eslint for JavaScript linting
+- .travis.yml to lint JavaScript
+
+### Changed
+
+- Updated .gitignore to include node.js
+
 ## [0.0.2] - 2019-07-08
 
 ### Added

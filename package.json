@@ -1,0 +1,23 @@
+{
+  "name": "flocx-ui",
+  "version": "0.0.1",
+  "description": "Flocx plugin for horizon to show and create bids, offers, and contracts",
+  "scripts": {
+    "lint": "eslint --no-color flocx_ui/static"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdtzmn/flocx-ui.git"
+  },
+  "author": "Jacob Daitzman <jdtzmn@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jdtzmn/flocx-ui/issues"
+  },
+  "homepage": "https://github.com/jdtzmn/flocx-ui#readme",
+  "devDependencies": {
+    "eslint": "^3.0.0",
+    "eslint-config-openstack": "^4.0.1",
+    "eslint-plugin-angular": "^4.0.1"
+  }
+}
