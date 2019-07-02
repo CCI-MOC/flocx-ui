@@ -11,10 +11,9 @@
 {% endblock %}
 
 {% block page_header %}
-  <hz-page-header
-    header="{$ 'Flocx' | translate $}"
-    description="{$ 'A dashboard for flocx' | translate $}">
-  </hz-page-header>
+  <ng-include
+    src="'{{ STATIC_URL }}dashboard/project/flocx/page-header/page-header.html'">
+  </ng-include>
 {% endblock page_header %}
 
 {% block main %}
