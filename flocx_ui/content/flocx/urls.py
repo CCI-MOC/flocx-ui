@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-import flocx_ui.api.flocx_rest_api
+import flocx_ui.api.flocx_rest_api #pylint: disable=W0611
 from flocx_ui.content.flocx import views
 
-urlpatterns = [
-  url(r'^$', views.IndexView.as_view(), name='index')
+urlpatterns = [ #pylint: disable=C0103
+    url(r'^$', views.IndexView.as_view(), name='index')
 ]

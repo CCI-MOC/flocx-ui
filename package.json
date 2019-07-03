@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Flocx plugin for horizon to show and create bids, offers, and contracts",
   "scripts": {
-    "lint": "eslint --no-color flocx_ui/static"
+    "lint": "eslint --no-color flocx_ui/static",
+    "lint:python": "pylint flocx_ui/**/*.py"
   },
   "repository": {
     "type": "git",
