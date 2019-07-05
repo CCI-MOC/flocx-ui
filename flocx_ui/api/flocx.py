@@ -14,9 +14,9 @@ HOST = os.getenv('DEFAULT_API_HOST', DEFAULT_API_HOST)
 PORT = os.getenv('DEFAULT_API_PORT', DEFAULT_API_PORT)
 BASE_URL = HOST + ':' + PORT
 
-def get (path):
+def get(path):
     """An alias for requests.get with the BASE_URL
-    
+
     :param path: A url path
     :return: A request for a given path
     """

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flocx JavaScript service client
 - Offer list page
 - pylint linting
+- JavaScript testing using karma
 
 ### Changed
 

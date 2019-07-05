@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Flocx plugin for horizon to show and create bids, offers, and contracts",
   "scripts": {
+    "postinstall": "if [ ! -d .tox ] || [ ! -d .tox/py37 ]; then tox -epy37 --notest; fi",
+    "test": "karma start flocx_ui/karma.conf.js --single-run",
+    "test:watch": "karma start flocx_ui/karma.conf.js",
     "lint": "eslint --no-color flocx_ui/static",
     "lint:python": "pylint flocx_ui/**/*.py"
   },
@@ -19,6 +22,16 @@
   "devDependencies": {
     "eslint": "^3.0.0",
     "eslint-config-openstack": "^4.0.1",
-    "eslint-plugin-angular": "^4.0.1"
+    "eslint-plugin-angular": "^4.0.1",
+    "jasmine-core": "^3.4.0",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^2.0.0",
+    "karma-coverage": "^1.1.2",
+    "karma-jasmine": "^2.0.1",
+    "karma-jasmine-matchers": "^4.0.2",
+    "karma-ng-html2js-preprocessor": "^1.0.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-threshold-reporter": "^0.1.15"
   }
 }
