@@ -9,6 +9,20 @@
     "lint": "eslint --no-color flocx_ui/static",
     "lint:python": "pylint flocx_ui/**/*.py"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.py": [
+      "pylint"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jdtzmn/flocx-ui.git"
@@ -23,6 +37,7 @@
     "eslint": "^3.0.0",
     "eslint-config-openstack": "^4.0.1",
     "eslint-plugin-angular": "^4.0.1",
+    "husky": "^3.0.0",
     "jasmine-core": "^3.4.0",
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -32,6 +47,7 @@
     "karma-jasmine-matchers": "^4.0.2",
     "karma-ng-html2js-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "karma-threshold-reporter": "^0.1.15"
+    "karma-threshold-reporter": "^0.1.15",
+    "lint-staged": "^9.1.0"
   }
 }
