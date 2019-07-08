@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- CONTRIBUTING.md file to document the contributing procedure
+
 ### Changed
 
 - README.rst to README.md (at least until sphinx is used later to generate docs)
