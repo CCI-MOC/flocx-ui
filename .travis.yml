@@ -12,6 +12,8 @@ jobs:
   include:
     - name: JavaScript
       script: yarn test
+    - name: Python
+      script: tox
     - stage: lint
       name: JavaScript
       script: yarn lint

@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Offer list page
 - pylint linting
 - JavaScript testing using karma
+- Basic unit tests
+- Scaffold for integration tests (not yet in use)
 
 ### Changed
 
