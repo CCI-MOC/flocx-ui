@@ -2,6 +2,7 @@ import os
 
 import requests
 from requests.compat import urljoin
+from openstack_dashboard.api.rest.utils import AjaxError
 
 from dotenv import load_dotenv
 load_dotenv(override=True)
@@ -28,7 +29,7 @@ def handle_error(service_func):
             return service_func()
         except requests.exceptions.RequestException as e:
             print(e)
-            # TODO: handle errors
+            raise AjaxError(500, 'Internal Server Error')
 
     return try_and_except
 

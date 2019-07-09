@@ -24,5 +24,7 @@ settings.update_dashboards(
     INSTALLED_APPS
 )
 
+ROOT_URLCONF = 'flocx_ui.test.urls'
+
 # Ensure any duplicate apps are removed after the update_dashboards call
 INSTALLED_APPS = list(set(INSTALLED_APPS))

@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-import flocx_ui.api.flocx_rest_api #pylint: disable=W0611
+import flocx_ui.api.flocx_rest_api #pylint: disable=unused-import
 from flocx_ui.content.flocx import views
 
 urlpatterns = [ #pylint: disable=C0103
