@@ -25,6 +25,30 @@ def get_test_data(key):
     json_data = read_data_file()
     return json_data[key]
 
+class MockResponse: # pylint: disable=too-few-public-methods
+    """
+    Class to mock the Response object returned by the requests python library
+
+    Usage:
+
+    response = MockResponse()
+    response.content = '["json_content"]'
+
+    This class is based on the requests.Response class
+    """
+
+    def __init__(self):
+        self.content = None
+        self.encoding = 'application/json'
+
+    def json(self):
+        """Get the JSON dict of the current content
+
+        :raises JSONDecodeError: If the content is not valid JSON
+        :return: self.content as JSON dict
+        """
+        return json.loads(self.content)
+
 class RequestFactory:
     """
     Class to construct requests specifically for a horizon plugin

@@ -24,6 +24,13 @@ def get(path):
     return requests.get(urljoin(BASE_URL, path))
 
 def handle_error(service_func):
+    """A decorator for service functions to handle Request exceptions elegantly
+
+    :param service_func: The function to be wrapped
+    :raises AjaxError: An AjaxError will be thrown and will automatically
+        report it to the openstack_dashboard api (see flocx_rest_api.py > rest_utils)
+    :return: The decorated function
+    """
     def try_and_except():
         try:
             return service_func()
