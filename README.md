@@ -2,6 +2,10 @@
 
 Flocx plugin for horizon to show and create bids, offers, and contracts
 
+> FLOCX provides a marketplace for trading physical servers among co-located pools of hardware where each pool is owned and managed by independent organizations. Using FLOCX, organizations can rent nodes from their co-located neighbors in times of high demand and offer their own resources at a suitable price when others experience high demand.
+
+Read about the Flocx project [here](https://github.com/CCI-MOC/flocx).
+
 * Free software: Apache license
 * Release Notes: View the [changelog](CHANGELOG.md)
 * Contributing: Read [CONTRIBUTING.md](CONTRIBUTING.md)
@@ -13,6 +17,11 @@ Add this repo as an external repository into your `local.conf` file:
 ```conf
 [[local|localrc]]
 enable_plugin flocx https://github.com/CCI-MOC/flocx-ui
+
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
 ```
 
 ## Manual Installation
