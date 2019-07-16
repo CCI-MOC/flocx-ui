@@ -19,11 +19,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Registration unit tests
 - API unit tests
 - Scaffold for integration tests (not yet in use)
+- docker-compose config along with accompanying scripts and Dockerfile
 
 ### Changed
 
 - Updated .gitignore to include node.js
 - Page header to be an angular page instead of a horizon header
+
+### Fixed
+
+- A bug where angular would not be able to locate the openstack-service-api.nova module when a file named `flocx.service.js` existed
+
+### Removed
+
+- Unnecessary requirements
 
 ## [0.0.2] - 2019-07-08
 

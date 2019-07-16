@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('horizon.app.core.openstack-service-api', [])
+    .module('horizon.app.core.openstack-service-api')
     .factory('horizon.app.core.openstack-service-api.flocx', flocxAPI);
 
   flocxAPI.$inject = [

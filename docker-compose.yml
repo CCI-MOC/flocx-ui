@@ -1,0 +1,13 @@
+version: '3'
+services:
+  keystone:
+    image: jdtzmn/keystone-docker
+    environment:
+      - HOSTNAME=keystone
+      - KEYSTONE_ADMIN_PASSWORD=secret
+  horizon:
+    build: .
+    volumes: 
+      - .:/flocx-ui
+    ports:
+        - "8000:80"
