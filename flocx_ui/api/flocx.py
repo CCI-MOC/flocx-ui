@@ -11,8 +11,8 @@ load_dotenv(override=True)
 DEFAULT_API_HOST = 'http://localhost'
 DEFAULT_API_PORT = '8080'
 
-HOST = os.getenv('DEFAULT_API_HOST', DEFAULT_API_HOST)
-PORT = os.getenv('DEFAULT_API_PORT', DEFAULT_API_PORT)
+HOST = os.getenv('FLOCX_API_HOST', DEFAULT_API_HOST)
+PORT = os.getenv('FLOCX_API_PORT', DEFAULT_API_PORT)
 BASE_URL = HOST + ':' + PORT
 
 def get(path):

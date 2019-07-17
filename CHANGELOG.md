@@ -20,11 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API unit tests
 - Scaffold for integration tests (not yet in use)
 - docker-compose config along with accompanying scripts and Dockerfile
+- A section in the CONTRIBUTING.md on how to setup the development environment using docker-compose
 
 ### Changed
 
 - Updated .gitignore to include node.js
 - Page header to be an angular page instead of a horizon header
+- The environment variable names to customize the host and port of the flocx market server from `DEFAULT_API_HOST` and `DEFAULT_API_PORT` to `FLOCX_API_HOST` and `FLOCX_API_PORT`
 
 ### Fixed
 
