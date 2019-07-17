@@ -27,10 +27,49 @@ This project follows the Horizon plugin structure outlined in the [Horizon docs]
 
 ### Using docker
 
-Flocx-ui comes with a docker-compose file to automatically setup a keystone instance, configure a horizon dashboard at `http://localhost:8080`, and install the flocx-ui plugin on that instance:
+Flocx-ui comes with a docker-compose file to automatically setup a keystone instance, configure a horizon dashboard at `http://localhost:8000`, and install the flocx-ui plugin on that instance:
+
+---
 
 Startup the docker-compose setup
 
 ```sh
 $ docker-compose up
 ```
+
+#### The server should now be running at: `http://localhost:8000`.
+
+Now login using development credentials:
+
+**Username**: admin
+
+**Password**: secret
+
+> To view the flocx page, navigate to Project > Other > Flocx
+
+### Running tests and linters
+
+#### Install Prerequisites
+
+* [node.js](https://nodejs.org/) — The JavaScript tests and linters require both node and npm to be installed
+* [tox](https://tox.readthedocs.io) - Tox handles the python virtualenv. 
+
+Install `tox` using [pip](https://pip.pypa.io):
+
+```sh
+$ pip install tox
+```
+
+#### Install dependencies
+
+```sh
+$ npm install
+# Running this will install all python dependencies as well using tox
+```
+
+#### Run tests
+
+* `npm run test:js`
+* `npm run test:py`
+* `npm run lint:js`
+* `npm run lint:py`

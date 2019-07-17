@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Scaffold for integration tests (not yet in use)
 - docker-compose config along with accompanying scripts and Dockerfile
 - A section in the CONTRIBUTING.md on how to setup the development environment using docker-compose
+- Test scripts to the package.json for tests and linters in both python and JavaScript
+- Documentation to the CONTRIBUTING.md on running the tests and linters
+- Docker containers can now access the flocx-market server when it is running on the host
 
 ### Changed
 

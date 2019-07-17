@@ -11,12 +11,12 @@ cache:
 jobs:
   include:
     - name: JavaScript
-      script: yarn test
+      script: yarn test:js
     - name: Python
-      script: tox
+      script: yarn test:py
     - stage: lint
       name: JavaScript
-      script: yarn lint
+      script: yarn lint:js
     - before_script: source .tox/py37/bin/activate
       name: Python
-      script: pylint flocx_ui/**/*.py
+      script: yarn lint:py
