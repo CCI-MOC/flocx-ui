@@ -21,6 +21,7 @@
     }
 
     function retrieveOffers () {
+      // Get the list of offers from the flocx-market
       flocx.getOffers().then(onGetOffers);
     }
 
