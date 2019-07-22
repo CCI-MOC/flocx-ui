@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- VSCode files to `.gitignore`
+- `api/schema.py` to validate the schema in a request to create an offer
+- REST API endpoints to create an offer and get an offer's details
+
+### Removed
+
+- `handle_error` decorator from the flocx.py API service since it is already handled in the flocx_rest_api.py `@rest_utils.ajax` decorator
+
 ## [0.1.0] - 2019-07-25
 
 ### Added

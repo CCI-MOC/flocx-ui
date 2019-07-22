@@ -5,11 +5,12 @@ from requests.compat import urljoin
 from openstack_dashboard.api.rest.utils import AjaxError
 
 from dotenv import load_dotenv
+from flocx_ui.api import schema
+
 load_dotenv(override=True)
 
-
 DEFAULT_API_HOST = 'http://localhost'
-DEFAULT_API_PORT = '8080'
+DEFAULT_API_PORT = '8081'
 
 HOST = os.getenv('FLOCX_API_HOST', DEFAULT_API_HOST)
 PORT = os.getenv('FLOCX_API_PORT', DEFAULT_API_PORT)
@@ -23,24 +24,14 @@ def get(path):
     """
     return requests.get(urljoin(BASE_URL, path))
 
-def handle_error(service_func):
-    """A decorator for service functions to handle Request exceptions elegantly
+def post(path, json=None):
+    """An alias for requests.post with the BASE_URL
 
-    :param service_func: The function to be wrapped
-    :raises AjaxError: An AjaxError will be thrown and will automatically
-        report it to the openstack_dashboard api (see flocx_rest_api.py > rest_utils)
-    :return: The decorated function
+    :param path: A url path
+    :return: A request for a given path
     """
-    def try_and_except():
-        try:
-            return service_func()
-        except requests.exceptions.RequestException as e:
-            print(e)
-            raise AjaxError(500, 'Internal Server Error')
+    return requests.post(urljoin(BASE_URL, path), None, json)
 
-    return try_and_except
-
-@handle_error
 def offer_list():
     """Retrieve a list of offers
 
@@ -49,5 +40,25 @@ def offer_list():
     """
 
     r = get('/offer')
+    data = r.json()
+    return data
+
+def offer_create(offer):
+    """Create an offer
+
+    :param offer: The offer to be created
+    :raises AjaxError: If the offer param is invalid
+    :return: The offer that was created
+    """
+    if not schema.validate_offer(offer, return_boolean=True):
+        raise AjaxError(400, 'Invalid or insufficient input parameters. Cannot create offer.')
+    r = post('/offer', offer)
+    data = r.json()
+    return data
+
+def offer_get(offer_id):
+    if not schema.validate_uuid(offer_id, return_boolean=True):
+        raise AjaxError(400, 'Invalid Offer id.')
+    r = get('/offer/%r')
     data = r.json()
     return data

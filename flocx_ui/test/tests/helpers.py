@@ -32,12 +32,14 @@ class MockResponse: # pylint: disable=too-few-public-methods
     Usage:
 
     response = MockResponse()
+    response.status_code = 200
     response.content = '["json_content"]'
 
     This class is based on the requests.Response class
     """
 
     def __init__(self):
+        self.status_code = None
         self.content = None
         self.encoding = 'application/json'
 
@@ -74,8 +76,15 @@ class RequestFactory:
         return request
 
     def get(self, *args, **kwargs):
-        """Handle constructing get requests
+        """Handle constructing GET requests
 
         :return: The GET request
         """
         return self.generic('GET', *args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        """Handle constructing POST requests
+
+        :return: The POST request
+        """
+        return self.generic('POST', *args, **kwargs)
