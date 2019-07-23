@@ -94,3 +94,13 @@ def offer_get(request, offer_id):
     r = get('/offer/%r', token=request.user.token.id)
     data = r.json()
     return data
+
+def contract_list(request):
+    """Retrieve a list of contracts
+
+    :param request: HTTP request
+    :return: A list of contracts
+    """
+    r = get('/contract', token=request.user.token.id)
+    data = r.json()
+    return data

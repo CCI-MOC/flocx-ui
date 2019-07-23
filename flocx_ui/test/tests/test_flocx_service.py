@@ -72,3 +72,16 @@ class RestApiTests(test.TestCase):
             status_code, msg = err.http_status, str(err)
             self.assertEqual(status_code, 400)
             self.assertEqual(msg, 'Invalid Offer id.')
+
+    @mock.patch('flocx_ui.api.flocx.get')
+    def test_get_contracts(self, mock_get):
+        testData = get_test_data('contract_list')
+
+        mock_response = MockResponse()
+        string_data = json.dumps(testData)
+        mock_response.content = string_data
+
+        mock_get.return_value = mock_response
+
+        output = contract_list(mock_request)
+        self.assertEqual(output, testData)

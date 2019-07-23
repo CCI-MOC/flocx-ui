@@ -3,8 +3,7 @@ from unittest import mock
 
 from openstack_dashboard.test import helpers as test
 
-from flocx_ui.api.flocx_rest_api import Offers as OffersAPI
-from flocx_ui.api.flocx_rest_api import Offer as OfferAPI
+from flocx_ui.api import flocx_rest_api as api
 from flocx_ui.test.tests.helpers import get_test_data, RequestFactory
 
 class RestApiTests(test.TestCase):
@@ -25,7 +24,7 @@ class RestApiTests(test.TestCase):
         rf = RequestFactory()
         request = rf.get('/api/flocx/offer/')
 
-        offersAPI = OffersAPI()
+        offersAPI = api.Offers()
         response = offersAPI.get(request)
         self.assertEqual(response.json, testData)
 
@@ -39,7 +38,7 @@ class RestApiTests(test.TestCase):
                           data=json.dumps(testData),
                           content_type='application/json')
 
-        offersAPI = OffersAPI()
+        offersAPI = api.Offers()
         response = offersAPI.post(request)
         self.assertEqual(response.json, testData)
 
@@ -52,6 +51,18 @@ class RestApiTests(test.TestCase):
         rf = RequestFactory()
         request = rf.get('/api/flocx/offer/{}'.format(offer_id))
 
-        offerAPI = OfferAPI()
+        offerAPI = api.Offer()
         response = offerAPI.get(request, offer_id)
+        self.assertEqual(response.json, testData)
+
+    @mock.patch('flocx_ui.api.flocx.contract_list')
+    def test_get_contracts(self, mock_contract_list):
+        testData = get_test_data('contract_list')
+        mock_contract_list.return_value = testData
+
+        rf = RequestFactory()
+        request = rf.get('/api/flocx/contract/')
+
+        contractsAPI = api.Contracts()
+        response = contractsAPI.get(request)
         self.assertEqual(response.json, testData)
