@@ -409,3 +409,6 @@ npm-debug.log
 
 # release notes build
 releasenotes/build
+
+#ignore vscode byproducts
+.vscode
