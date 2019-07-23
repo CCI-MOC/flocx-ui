@@ -37,7 +37,6 @@ class MockResponse: # pylint: disable=too-few-public-methods
 
     This class is based on the requests.Response class
     """
-
     def __init__(self):
         self.status_code = None
         self.content = None

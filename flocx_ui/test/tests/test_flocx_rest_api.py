@@ -53,5 +53,5 @@ class RestApiTests(test.TestCase):
         request = rf.get('/api/flocx/offer/{}'.format(offer_id))
 
         offerAPI = OfferAPI()
-        response = offerAPI.get(request)
+        response = offerAPI.get(request, offer_id)
         self.assertEqual(response.json, testData)

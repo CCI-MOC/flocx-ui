@@ -13,9 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `api/schema.py` to validate the schema in a request to create an offer
 - REST API endpoints to create an offer and get an offer's details
 
+### Changed
+
+- The API to work with the flocx-market directly. This meant adding an `X-Auth-Token` header along with all API calls
+
 ### Removed
 
 - `handle_error` decorator from the flocx.py API service since it is already handled in the flocx_rest_api.py `@rest_utils.ajax` decorator
+- keystone service from `docker-compose.yml` since the flocx-ui plugin will now talk directly with the flocx-market API
 
 ## [0.1.0] - 2019-07-25
 

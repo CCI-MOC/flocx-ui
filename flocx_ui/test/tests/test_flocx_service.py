@@ -6,6 +6,9 @@ from openstack_dashboard.test import helpers as test
 from flocx_ui.api.flocx import * # pylint: disable=wildcard-import,unused-wildcard-import
 from flocx_ui.test.tests.helpers import get_test_data, MockResponse
 
+mock_request = test.TestCase.mock_rest_request()
+mock_request.user.token.id = 'auth_token'
+
 class RestApiTests(test.TestCase):
     @mock.patch('flocx_ui.api.flocx.get')
     def test_get_offers(self, mock_get):
@@ -17,7 +20,7 @@ class RestApiTests(test.TestCase):
 
         mock_get.return_value = mock_response
 
-        output = offer_list()
+        output = offer_list(mock_request)
         self.assertEqual(output, testData)
 
     @mock.patch('flocx_ui.api.flocx.post')
@@ -31,14 +34,14 @@ class RestApiTests(test.TestCase):
 
         mock_post.return_value = mock_response
 
-        output = offer_create(testData)
+        output = offer_create(mock_request, testData)
         self.assertEqual(output, testData)
 
     def test_create_invalid_offer(self):
         testOffer = get_test_data('invalid_offer')
 
         try:
-            offer_create(testOffer)
+            offer_create(mock_request, testOffer)
             self.fail() # Above code should fail
         except AjaxError as err:
             status_code, msg = err.http_status, str(err)
@@ -57,13 +60,13 @@ class RestApiTests(test.TestCase):
 
         mock_get.return_value = mock_response
 
-        output = offer_get(testId)
+        output = offer_get(mock_request, testId)
         self.assertEqual(output, testOffer)
 
     def test_get_offer_invalid_id(self):
         invalid_offer_id = 'invalid_offer'
         try:
-            offer_get(invalid_offer_id)
+            offer_get(mock_request, invalid_offer_id)
             self.fail() # Above code should fail
         except AjaxError as err:
             status_code, msg = err.http_status, str(err)
