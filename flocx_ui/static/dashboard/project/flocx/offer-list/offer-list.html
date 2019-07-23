@@ -1,9 +1,66 @@
 <div ng-controller="FlocxOfferListController as ctrl">
-  <div>Loading data from your controller:</div>
-  <ul>
-    <li ng-repeat="item in ctrl.items">
-      <span class="c1">{$ item.name $}</span>
-      <span class="c2">{$ item.id $}</span>
-    </li>
-  </ul>
+  <div class="col-lg-10">
+    <h3 style="margin: 24px 0;">Offers</h3>
+    <table class="table mt-1">
+      <thead>
+        <tr>
+          <th scope="col">Status</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+          <th scope="col">Cost</th>
+          <th scope="col">Server Config</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="offer in ctrl.offers">
+          <td>
+              <button
+                class="btn btn-link dropdown-toggle text-capitalize"
+                type="button"
+                id="statusDropdown"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                style="padding-left: 0;"
+              >
+                <!-- available, matched, used, cancelled, expired -->
+                <i
+                  class="fa fa-circle"
+                  ng-class="{
+                    'text-success': offer.status === 'available',
+                    'text-primary': offer.status === 'matched',
+                    'text-info': offer.status === 'used',
+                    'text-warning': offer.status === 'cancelled',
+                    'text-danger': offer.status === 'expired'
+                  }"
+                  style="
+                    font-size: 0.5em;
+                    vertical-align: 60%;
+                    margin-right: 4px;
+                  "
+                >
+                </i>
+                {$ offer.status $}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                <li><a href="#">Available</a></li>
+                <li><a href="#">Matched</a></li>
+                <li><a href="#">Used</a></li>
+                <li><a href="#">Cancelled</a></li>
+                <li><a href="#">Expired</a></li>
+              </ul>
+          </td>
+          <td>{$ offer.start_time $}</td>
+          <td>{$ offer.end_time $}</td>
+          <td>{$ offer.cost $}</td>
+          <td>
+            <button href="#" class="btn btn-link">
+              <i class="fa fa-cog"></i>
+              View Config
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

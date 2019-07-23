@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- eslint for JavaScript linting
+- .travis.yml to lint JavaScript
+- Basic flocx service and REST API
+- Flocx JavaScript service client
+- Offer list page
+- pylint linting
+
+### Changed
+
+- Updated .gitignore to include node.js
+- Page header to be an angular page instead of a horizon header
+
 ## [0.0.2] - 2019-07-08
 
 ### Added
