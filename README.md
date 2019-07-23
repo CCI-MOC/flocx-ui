@@ -70,11 +70,11 @@ $ sudo service apache2 restart
 ### Python tests
 
 ```bash
-$ tox
+$ npm run test:py
 ```
 
 ### JavaScript tests
 
 ```bash
-$ npm test
+$ npm run test:js
 ```

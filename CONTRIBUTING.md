@@ -19,13 +19,14 @@ This project follows the Horizon plugin structure outlined in the [Horizon docs]
 ### Prerequisites
 
 * [docker](https://www.docker.com/) — as well as docker-compose
+* [flocx-keystone-dev](https://github.com/CCI-MOC/flocx-keystone-dev) - Flocx-keystone-dev should be running on port `5000`.
 * [flocx-market](https://github.com/CCI-MOC/flocx-market) — Flocx-market should be running on port `8080`.
 * [node.js](https://nodejs.org/) — The JavaScript tests and linters require both node and npm to be installed
 * [tox](https://tox.readthedocs.io) - Tox handles the python virtualenv.
 
 > You can also specify a host and a port for the flocx-market using the `FLOCX_API_HOST` and `FLOCX_API_PORT`.
 >
-> The defaults are `http://localhost` and `8080` respectively.
+> The defaults are `http://localhost` and `8081` respectively.
 
 ### Install dependencies
 
@@ -36,17 +37,21 @@ $ npm install
 
 ### Using docker
 
-Flocx-ui comes with a docker-compose file to automatically setup a keystone instance, configure a horizon dashboard at `http://localhost:8000`, and install the flocx-ui plugin on that instance:
+Make sure that the `flocx-keystone-dev`'s public url is set to `http://host.docker.internal:5000` using the following command before running the `docker-compose up` for keystone:
 
----
+```sh
+export KEYSTONE_PUBLIC_URL=http://host.docker.internal:5000
+```
 
 1. Startup the docker-compose setup
+
+Flocx-ui comes with a docker-compose file to automatically setup a horizon dashboard at `http://localhost:8000` and install the flocx-ui plugin:
 
 ```sh
 $ docker-compose up
 ```
 
-#### The server should now be running at: `http://localhost:8000`.
+#### The server should now be running at: `http://localhost:8000`
 
 2. Login using development credentials:
 

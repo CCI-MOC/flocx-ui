@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - The API to work with the flocx-market directly. This meant adding an `X-Auth-Token` header along with all API calls
+- Developer documentation to reflect the API changes from a mock backend to using the flocx-market directly
 
 ### Removed
 
