@@ -48,6 +48,7 @@ class Offer(generic.View):
         offer = flocx.offer_get(request, offer_id)
         return offer
 
+@urls.register
 class Contracts(generic.View):
 
     url_regex = r'flocx/contract/$'

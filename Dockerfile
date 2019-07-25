@@ -1,4 +1,4 @@
-FROM jdtzmn/horizon-docker:stein-tox
+FROM jdtzmn/horizon-docker:tox-stein
 
 VOLUME /flocx-ui
 COPY . /flocx-ui

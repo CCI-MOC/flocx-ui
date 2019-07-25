@@ -2,14 +2,14 @@
   'use strict';
 
   angular
-    .module('horizon.dashboard.project.flocx', [])
-    .controller('FlocxOfferListController', FlocxOfferListController);
+    .module('horizon.dashboard.project.flocx')
+    .controller('OfferListController', OfferListController);
 
-  FlocxOfferListController.$inject = [
+  OfferListController.$inject = [
     'horizon.app.core.openstack-service-api.flocx'
   ];
 
-  function FlocxOfferListController(flocx) {
+  function OfferListController(flocx) {
     var ctrl = this;
 
     ctrl.offers = [];
@@ -27,10 +27,8 @@
 
     function onGetOffers (offers) {
       ctrl.offers = offers.map(function (offer) {
-        var startTime = offer.start_time.slice(1, -1); // get rid of parenthesis
-        var endTime = offer.end_time.slice(1, -1); // get rid of parenthesis
-        offer.start_time = new Date(startTime).toLocaleString();
-        offer.end_time = new Date(endTime).toLocaleString();
+        offer.start_time = new Date(offer.start_time).toLocaleString();
+        offer.end_time = new Date(offer.end_time).toLocaleString();
         return offer;
       });
     }

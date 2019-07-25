@@ -1,0 +1,43 @@
+<div ng-controller="ContractListController as ctrl">
+  <div class="col-lg-10">
+    <h3 style="margin: 24px 0;">Contracts</h3>
+    <div class="btn-group" role="group">
+      <button
+        type="button"
+        class="btn"
+        ng-class="{ 'btn-default': ctrl.pane !== 'active', 'btn-primary': ctrl.pane === 'active' }"
+        ng-click="ctrl.showPane('active')"
+      >
+        Active
+      </button>
+      <button
+        type="button"
+        class="btn"
+        ng-class="{ 'btn-default': ctrl.pane !== 'expired', 'btn-primary': ctrl.pane === 'expired' }"
+        ng-click="ctrl.showPane('expired')"
+      >
+        Expired
+      </button>
+    </div>
+    <table class="table" style="margin-top: 16px;">
+      <thead>
+        <tr>
+          <th scope="col">Contract ID</th>
+          <th scope="col">Status</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">End Time</th>
+          <th scope="col">Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="contract in ctrl.contracts">
+          <td>{$ contract.contract_id $}</td>
+          <td>{$ contract.status $}</td>
+          <td>{$ contract.start_time $}</td>
+          <td>{$ contract.end_time $}</td>
+          <td>{$ contract.cost $}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
