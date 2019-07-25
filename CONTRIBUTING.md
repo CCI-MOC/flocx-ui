@@ -20,10 +20,19 @@ This project follows the Horizon plugin structure outlined in the [Horizon docs]
 
 * [docker](https://www.docker.com/) — as well as docker-compose
 * [flocx-market](https://github.com/CCI-MOC/flocx-market) — Flocx-market should be running on port `8080`.
+* [node.js](https://nodejs.org/) — The JavaScript tests and linters require both node and npm to be installed
+* [tox](https://tox.readthedocs.io) - Tox handles the python virtualenv.
 
 > You can also specify a host and a port for the flocx-market using the `FLOCX_API_HOST` and `FLOCX_API_PORT`.
 >
 > The defaults are `http://localhost` and `8080` respectively.
+
+### Install dependencies
+
+```sh
+$ npm install
+# Running this will install all python dependencies as well using tox
+```
 
 ### Using docker
 
@@ -31,7 +40,7 @@ Flocx-ui comes with a docker-compose file to automatically setup a keystone inst
 
 ---
 
-Startup the docker-compose setup
+1. Startup the docker-compose setup
 
 ```sh
 $ docker-compose up
@@ -39,7 +48,7 @@ $ docker-compose up
 
 #### The server should now be running at: `http://localhost:8000`.
 
-Now login using development credentials:
+2. Login using development credentials:
 
 **Username**: admin
 
@@ -49,27 +58,14 @@ Now login using development credentials:
 
 ### Running tests and linters
 
-#### Install Prerequisites
-
-* [node.js](https://nodejs.org/) — The JavaScript tests and linters require both node and npm to be installed
-* [tox](https://tox.readthedocs.io) - Tox handles the python virtualenv. 
-
-Install `tox` using [pip](https://pip.pypa.io):
-
-```sh
-$ pip install tox
-```
-
-#### Install dependencies
-
-```sh
-$ npm install
-# Running this will install all python dependencies as well using tox
-```
+Use the included npm scripts below to run tests and linters in JavaScript and Python.
 
 #### Run tests
 
 * `npm run test:js`
 * `npm run test:py`
+
+#### Run linters
+
 * `npm run lint:js`
 * `npm run lint:py`
