@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2019-07-25
+
 ### Added
 
 - eslint for JavaScript linting
@@ -19,11 +21,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Registration unit tests
 - API unit tests
 - Scaffold for integration tests (not yet in use)
+- docker-compose config along with accompanying scripts and Dockerfile
+- A section in the CONTRIBUTING.md on how to setup the development environment using docker-compose
+- Test scripts to the package.json for tests and linters in both python and JavaScript
+- Documentation to the CONTRIBUTING.md on running the tests and linters
+- Docker containers can now access the flocx-market server when it is running on the host
 
 ### Changed
 
 - Updated .gitignore to include node.js
 - Page header to be an angular page instead of a horizon header
+- The environment variable names to customize the host and port of the flocx market server from `DEFAULT_API_HOST` and `DEFAULT_API_PORT` to `FLOCX_API_HOST` and `FLOCX_API_PORT`
+
+### Fixed
+
+- A bug where angular would not be able to locate the openstack-service-api.nova module when a file named `flocx.service.js` existed
+
+### Removed
+
+- Unnecessary requirements
 
 ## [0.0.2] - 2019-07-08
 
