@@ -10,7 +10,7 @@ Read about the Flocx project [here](https://github.com/CCI-MOC/flocx).
 * Release Notes: View the [changelog](CHANGELOG.md)
 * Contributing: Read [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Enabling in DevStack
+## Enabling in DevStack (Coming Soon)
 
 Add this repo as an external repository into your `local.conf` file:
 
