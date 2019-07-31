@@ -6,17 +6,21 @@
     .controller('ContractListController', ContractListController);
 
   ContractListController.$inject = [
-    'horizon.app.core.openstack-service-api.flocx'
+    'horizon.app.core.openstack-service-api.flocx',
+    'horizon.dashboard.project.flocx.activeStatus',
+    'horizon.dashboard.project.flocx.expiredStatus'
   ];
 
-  function ContractListController(flocx) {
+  function ContractListController(flocx, activeStatus, expiredStatus) {
     var ctrl = this;
 
     ctrl.allContracts = [];
     ctrl.contracts = [];
-    ctrl.pane = 'active';
+    ctrl.pane = activeStatus;
 
     ctrl.showPane = showPane;
+    ctrl.activeStatus = activeStatus;
+    ctrl.expiredStatus = expiredStatus;
 
     // Event Handlers
 
@@ -52,10 +56,10 @@
     }
 
     function filter (contract) {
-      if (ctrl.pane === 'expired') {
-        return contract.status === 'expired';
+      if (ctrl.pane === expiredStatus) {
+        return contract.status === expiredStatus;
       }
-      return contract.status !== 'expired';
+      return contract.status !== expiredStatus;
     }
   }
 }());

@@ -5,16 +5,16 @@
       <button
         type="button"
         class="btn"
-        ng-class="{ 'btn-default': ctrl.pane !== 'active', 'btn-primary': ctrl.pane === 'active' }"
-        ng-click="ctrl.showPane('active')"
+        ng-class="{ 'btn-default': ctrl.pane !== ctrl.activeStatus, 'btn-primary': ctrl.pane === ctrl.activeStatus }"
+        ng-click="ctrl.showPane(ctrl.activeStatus)"
       >
         Active
       </button>
       <button
         type="button"
         class="btn"
-        ng-class="{ 'btn-default': ctrl.pane !== 'expired', 'btn-primary': ctrl.pane === 'expired' }"
-        ng-click="ctrl.showPane('expired')"
+        ng-class="{ 'btn-default': ctrl.pane !== ctrl.expiredStatus, 'btn-primary': ctrl.pane === ctrl.expiredStatus }"
+        ng-click="ctrl.showPane(ctrl.expiredStatus)"
       >
         Expired
       </button>

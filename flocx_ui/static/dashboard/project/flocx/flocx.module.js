@@ -16,6 +16,10 @@
   config.$inject = ['$provide', '$windowProvider'];
 
   function config($provide, $windowProvider) {
+    $provide.constant('horizon.dashboard.project.flocx.activeStatus', 'active');
+
+    $provide.constant('horizon.dashboard.project.flocx.expiredStatus', 'expired');
+
     var path = $windowProvider.$get().STATIC_URL + 'dashboard/project/flocx/';
     $provide.constant('horizon.dashboard.project.flocx.basePath', path);
   }
