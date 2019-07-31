@@ -1,0 +1,3 @@
+{
+  "extends": ["openstack/es2015"]
+}

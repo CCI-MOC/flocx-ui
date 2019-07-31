@@ -1,5 +1,9 @@
 version: '3'
 services:
+  baremetal:
+    build: ./docker/baremetal_mock
+    volumes: 
+      - ./docker/baremetal_mock:/usr/src/app
   horizon:
     build: .
     environment:
