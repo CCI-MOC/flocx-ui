@@ -59,6 +59,24 @@
       }
     ];
 
+    var sampleContracts = [
+      {
+        contract_id: "b711b1ca-a77e-4392-abcd-dc84c4f469ac",
+        time_created: "(2016-07-16T19:20:30-04:00)",
+        bid_id: "b711b1ca-a77e-4392-abcd-dc84c4f469ac",
+        offers: [
+          "b711b1ca-a77e-4392-abcd-dc84c4f46900",
+          "b711b1ca-a77e-4392-abcd-dc84c4f46901",
+          "b711b1ca-a77e-4392-abcd-dc84c4f46902",
+          "b711b1ca-a77e-4392-abcd-dc84c4f46915"
+        ],
+        start_time: "(2016-07-16T19:20:30-04:00)",
+        end_time: "(2016-08-16T19:20:30-04:00)",
+        cost: 11,
+        status: "matched"
+      }
+    ];
+
     var service = {
       init: init,
       flush: flush,
@@ -79,6 +97,10 @@
       // Get offers
       $httpBackend.whenGET('/api/flocx/offer')
         .respond(responseCode.SUCCESS, sampleOffers);
+
+      // Get contracts
+      $httpBackend.whenGET('/api/flocx/contract')
+        .respond(responseCode.SUCCESS, sampleContracts);
     }
 
     /**

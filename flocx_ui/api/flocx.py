@@ -63,8 +63,8 @@ def offer_list(request):
     :return A list of offers
     """
 
-    r = get('/offer', token=request.user.token.id)
-    data = r.json()
+    response = get('/offer', token=request.user.token.id)
+    data = response.json()
     return data
 
 def offer_create(request, offer):
@@ -77,8 +77,8 @@ def offer_create(request, offer):
     """
     if not schema.validate_offer(offer, return_boolean=True):
         raise AjaxError(400, 'Invalid or insufficient input parameters. Cannot create offer.')
-    r = post('/offer', json=offer, token=request.user.token.id)
-    data = r.json()
+    response = post('/offer', json=offer, token=request.user.token.id)
+    data = response.json()
     return data
 
 def offer_get(request, offer_id):
@@ -91,6 +91,16 @@ def offer_get(request, offer_id):
     """
     if not schema.validate_uuid(offer_id, return_boolean=True):
         raise AjaxError(400, 'Invalid Offer id.')
-    r = get('/offer/%r', token=request.user.token.id)
-    data = r.json()
+    response = get('/offer/%r', token=request.user.token.id)
+    data = response.json()
+    return data
+
+def contract_list(request):
+    """Retrieve a list of contracts
+
+    :param request: HTTP request
+    :return: A list of contracts
+    """
+    response = get('/contract', token=request.user.token.id)
+    data = response.json()
     return data

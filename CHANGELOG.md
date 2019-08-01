@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2019-08-01
+
+### Added
+
+- Contract endpoint to service API
+- Contract list user interface
+
+### Changed
+
+- Docker config to use a different horizon image tag
+
+### Removed
+
+- "Create an offer" button from the navbar
+
 ## [1.0.0] - 2019-07-25
 
 ### Added

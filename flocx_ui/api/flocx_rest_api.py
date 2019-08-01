@@ -47,3 +47,18 @@ class Offer(generic.View):
         """
         offer = flocx.offer_get(request, offer_id)
         return offer
+
+@urls.register
+class Contracts(generic.View):
+
+    url_regex = r'flocx/contract/$'
+
+    @rest_utils.ajax()
+    def get(self, request):
+        """Get the list of contracts
+
+        :param request: HTTP request
+        :return: List of contracts
+        """
+        offers = flocx.contract_list(request)
+        return offers

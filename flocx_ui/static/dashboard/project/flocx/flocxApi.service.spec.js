@@ -49,6 +49,17 @@
 
           flocxBackendMockService.flush();
         });
+
+        it('getContracts', function (done) {
+          flocxAPI.getContracts()
+            .then(function (offers) {
+              expect(offers).toBeDefined();
+              done();
+            })
+            .catch(fail);
+
+          flocxBackendMockService.flush();
+        });
       });
     });
 }());
