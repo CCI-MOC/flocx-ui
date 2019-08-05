@@ -18,6 +18,7 @@
   function flocxAPI(apiService) {
     var service = {
       getOffers: getOffers,
+      createOffer: createOffer,
       getContracts: getContracts
     };
 
@@ -28,7 +29,19 @@
      * @return {promise} Promise containing a list of offers
      */
     function getOffers() {
-      return apiService.get('/api/flocx/offer')
+      return apiService.get('/api/flocx/offer/')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    /**
+     * @description Create an offer
+     * @param {*} offer The offer data to be used when creating the offer
+     * @returns {promise} Promise containing the created offer
+     */
+    function createOffer(offer) {
+      return apiService.post('/api/flocx/offer/', offer)
         .then(function (response) {
           return response.data;
         });
@@ -39,7 +52,7 @@
      * @return {promise} Promise containing a list of contracts
      */
     function getContracts() {
-      return apiService.get('/api/flocx/contract')
+      return apiService.get('/api/flocx/contract/')
         .then(function (response) {
           return response.data;
         });

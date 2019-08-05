@@ -20,7 +20,7 @@ class SchemaTests(TestCase):
             self.assertIsNotNone(err)
 
     def test_valid_date(self):
-        valid_date = '(2016-07-16T19:20:30-04:00)'
+        valid_date = '2019-07-24 13:59:14'
         self.assertTrue(validate_date(valid_date))
 
     def test_invalid_date(self):
@@ -54,15 +54,11 @@ class SchemaTests(TestCase):
 
     def test_valid_offer(self):
         valid_offer = {
-            'marketplace_offer_id': 'b711b1ca-a77e-4392-a9b5-dc84c4f469ac',
             'provider_offer_id': '90894712-3b21-4bf7-9899-b4234530ff8b',
-            'provider_id': 'b9752cc0-9bed-4f1c-8917-12ade7a6fdbe',
             'project_id': '12a59a51-b4d6-497d-9f75-f56c409305c8',
-            'marketplace_date_created': '(2016-07-16T19:20:30-04:00)',
-            'status': 'available',
             'server_id': 'fb878e3e-9425-4285-babf-0e58a7b091b2',
-            'start_time': '(2016-07-16T19:20:30-04:00)',
-            'end_time': '(2016-08-16T19:20:30-04:00)',
+            'start_time': '2019-07-24 13:59:14',
+            'end_time': '2019-07-24 13:59:14',
             'server_config': {
                 'any_properties': True
             },

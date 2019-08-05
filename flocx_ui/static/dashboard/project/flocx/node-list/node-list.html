@@ -1,0 +1,50 @@
+<div ng-controller="NodeListController as ctrl">
+  <div class="col-lg-10">
+    <h3 style="margin: 24px 0;">My Nodes</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Node name</th>
+          <th scope="col">Status</th>
+          <th scope="col">CPUs</th>
+          <th scope="col">RAM</th>
+          <th scope="col">Disk</th>
+          <th scope="col">Lease expires</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in ctrl.merged">
+          <td>{$ item.name $}</td>
+          <td>{$ item.status $}</td>
+          <td>{$ item.cpus $}</td>
+          <td>{$ item.ram $}</td>
+          <td>{$ item.disk $}</td>
+          <td>{$ item.expires $}</td>
+          <td>
+            <input
+              ng-if="item.type === 'node'"
+              ng-click="ctrl.createOffer(item)"
+              class="btn btn-default"
+              type="button"
+              value="Offer Node"
+            >
+            <input
+              ng-if="item.type === 'offer'"
+              class="btn btn-danger"
+              type="button"
+              value="Cancel Offer"
+            >
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <b>Displaying {$ ctrl.merged.length $} items</b>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

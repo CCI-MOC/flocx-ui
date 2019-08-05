@@ -11,6 +11,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Ironic service and REST API endpoints
+- Additional comments where necessary
+- "Displaying X items" text at the bottom of data tables
+- A modal to create offers from existing nodes
+- A date filter to make using dates in the UI and throughout the application much simpler
+- Constants for certain values to allow easy customization
+- A detailed node list controller that merges data from Ironic with data from the flocx-market
+
+### Changed
+
+- Flocx service to handle incoming data in the form of bytes instead of as already decoded JSON
+- Now uses a node list merged with existing offers instead of using a separate offer list
+- Test coverage thresholds to be 30% from 50%
+- Certain API paths to have a final '/' at the end where there was not one previously
+
+### Fixed
+
+- The offer schema validation to accomodate changes in the flocx API
+
+## [1.0.1] - 2019-08-01
+
+### Added
+
 - Contract endpoint to service API
 - Contract list user interface
 

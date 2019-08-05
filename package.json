@@ -4,8 +4,8 @@
   "description": "Flocx plugin for horizon to show and create bids, offers, and contracts",
   "scripts": {
     "postinstall": "if [ ! -d .tox ] || [ ! -d .tox/py37 ]; then tox -epy37 --notest; fi",
-    "test:js": "karma start flocx_ui/karma.conf.js --single-run",
-    "test:js:watch": "karma start flocx_ui/karma.conf.js",
+    "test:js": "cross-env TZ=America/New_York karma start flocx_ui/karma.conf.js --single-run",
+    "test:js:watch": "cross-env TZ=America/New_York karma start flocx_ui/karma.conf.js",
     "test:py": "tox",
     "lint:js": "eslint --no-color flocx_ui/static",
     "lint:py": "pylint flocx_ui/**/*.py"
@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/jdtzmn/flocx-ui#readme",
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint": "^3.0.0",
     "eslint-config-openstack": "^4.0.1",
     "eslint-plugin-angular": "^4.0.1",

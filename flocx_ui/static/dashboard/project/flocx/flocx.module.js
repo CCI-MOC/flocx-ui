@@ -20,6 +20,12 @@
 
     $provide.constant('horizon.dashboard.project.flocx.expiredStatus', 'expired');
 
+    $provide.constant('horizon.dashboard.project.flocx.hourRegex', /^\d{1,2} [aApP][mM]$/);
+
+    $provide.constant('horizon.dashboard.project.flocx.defaultOfferDaysDifference', 7);
+
+    $provide.constant('horizon.dashboard.project.flocx.defaultOfferCost', 10);
+
     var path = $windowProvider.$get().STATIC_URL + 'dashboard/project/flocx/';
     $provide.constant('horizon.dashboard.project.flocx.basePath', path);
   }

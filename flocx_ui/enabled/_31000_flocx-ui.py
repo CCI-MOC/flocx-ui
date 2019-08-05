@@ -8,10 +8,10 @@ PANEL_DASHBOARD = 'project'
 ADD_PANEL = 'flocx_ui.content.flocx.panel.Flocx'
 
 # A list of applications to be prepended to INSTALLED_APPS
-ADD_INSTALLED_APPS = ['flocx_ui']
+ADD_INSTALLED_APPS = ['flocx_ui', 'ironic_ui']
 
 # A list of AngularJS modules to be loaded when Angular bootstraps.
-ADD_ANGULAR_MODULES = ['horizon.dashboard.project.flocx']
+ADD_ANGULAR_MODULES = ['horizon.dashboard.project.flocx', 'horizon.dashboard.admin.ironic']
 
 # Automatically discover static resources in installed apps
 AUTO_DISCOVER_STATIC_FILES = True

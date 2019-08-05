@@ -1,4 +1,5 @@
 import os
+import json
 
 import requests
 from requests.compat import urljoin
@@ -67,14 +68,15 @@ def offer_list(request):
     data = response.json()
     return data
 
-def offer_create(request, offer):
+def offer_create(request, offer_bytes):
     """Create an offer
 
-    :param offer: The offer to be created
+    :param offer_bytes: The offer to be created
     :param request: HTTP request
     :raises AjaxError: If the offer param is invalid
     :return: The offer that was created
     """
+    offer = json.loads(offer_bytes.decode('UTF-8'))
     if not schema.validate_offer(offer, return_boolean=True):
         raise AjaxError(400, 'Invalid or insufficient input parameters. Cannot create offer.')
     response = post('/offer', json=offer, token=request.user.token.id)

@@ -80,7 +80,9 @@
     var service = {
       init: init,
       flush: flush,
-      postTest: postTest
+      postTest: postTest,
+      _sampleOffers: sampleOffers,
+      _sampleContracts: sampleContracts
     };
 
     return service;
@@ -95,11 +97,14 @@
     function init () {
 
       // Get offers
-      $httpBackend.whenGET('/api/flocx/offer')
+      $httpBackend.whenGET('/api/flocx/offer/')
         .respond(responseCode.SUCCESS, sampleOffers);
 
+      $httpBackend.whenPOST('/api/flocx/offer/')
+        .respond(responseCode.SUCCESS, sampleOffers[0]);
+
       // Get contracts
-      $httpBackend.whenGET('/api/flocx/contract')
+      $httpBackend.whenGET('/api/flocx/contract/')
         .respond(responseCode.SUCCESS, sampleContracts);
     }
 

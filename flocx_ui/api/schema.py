@@ -35,6 +35,7 @@ def return_boolean_decorator(func):
             return func(*args, **kwargs)
         except SchemaError as err:
             if return_boolean:
+                print(err)
                 return False
             raise err
     return handle_boolean_keyword
@@ -71,7 +72,7 @@ def validate_date(date_string):
             Whether to raise SchemaError or return false if the offer is invalid
     """
     try:
-        datetime.strptime(date_string, '(%Y-%m-%dT%H:%M:%S%z)')
+        datetime.strptime(date_string, '%Y-%m-%d %H:%M:%S')
         return True
     except ValueError:
         raise SchemaError('{} is not a valid date'.format(date_string))
@@ -113,12 +114,8 @@ def validate_offer(offer, **_kwargs):
             Whether to raise SchemaError or return false if the offer is invalid
     """
     return Schema({
-        'marketplace_offer_id': validate_uuid,
         'provider_offer_id': validate_uuid,
-        'provider_id': validate_uuid,
         'project_id': validate_uuid,
-        'marketplace_date_created': validate_date,
-        'status': validate_offer_status,
         'server_id': validate_uuid,
         'start_time': validate_date,
         'end_time': validate_date,
