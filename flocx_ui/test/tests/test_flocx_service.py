@@ -53,7 +53,7 @@ class ServiceTests(test.TestCase):
     @mock.patch('flocx_ui.api.flocx.get')
     def test_get_offer(self, mock_get):
         testOffer = get_test_data('offer')
-        testId = 'thisisa0-uuid-4af3-8361-4d3f1930bd8e'
+        testId = 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' # Some random uuid
 
         mock_response = MockResponse()
         string_data = json.dumps(testOffer)

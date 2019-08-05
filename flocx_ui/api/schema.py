@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from schema import (Regex,
@@ -35,7 +36,7 @@ def return_boolean_decorator(func):
             return func(*args, **kwargs)
         except SchemaError as err:
             if return_boolean:
-                print(err)
+                logging.debug(err)
                 return False
             raise err
     return handle_boolean_keyword
