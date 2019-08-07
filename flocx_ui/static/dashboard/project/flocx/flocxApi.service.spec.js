@@ -50,10 +50,21 @@
           flocxBackendMockService.flush();
         });
 
+        it('createOffer', function (done) {
+          flocxAPI.createOffer(flocxBackendMockService._sampleOffers[0])
+            .then(function (offer) {
+              expect(offer).toBeDefined();
+              done();
+            })
+            .catch(fail);
+
+          flocxBackendMockService.flush();
+        });
+
         it('getContracts', function (done) {
           flocxAPI.getContracts()
-            .then(function (offers) {
-              expect(offers).toBeDefined();
+            .then(function (contracts) {
+              expect(contracts).toBeDefined();
               done();
             })
             .catch(fail);

@@ -48,6 +48,7 @@
     }
 
     function filterContracts (contracts) {
+      // Filter the contracts depending on the active tab
       ctrl.contracts = contracts.filter(filter).map(function (contract) {
         contract.start_time = new Date(contract.start_time).toLocaleString();
         contract.end_time = new Date(contract.end_time).toLocaleString();
@@ -56,6 +57,7 @@
     }
 
     function filter (contract) {
+      // Filter out depending on the active pane and the contract status
       if (ctrl.pane === expiredStatus) {
         return contract.status === expiredStatus;
       }

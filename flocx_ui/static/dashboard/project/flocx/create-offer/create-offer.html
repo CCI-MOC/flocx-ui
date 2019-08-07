@@ -1,0 +1,129 @@
+<div class="modal-header" modal-draggable>
+  <button type="button"
+          class="close"
+          ng-click="$dismiss()"
+          aria-hidden="true"
+          aria-label="Close">
+    <span aria-hidden="true" class="fa fa-times"></span>
+  </button>
+  <h3 class="modal-title">Create an offer</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" name="offerForm" action="javascript:void(0);">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Node name</label>
+      <div class="col-sm-9">
+        <h6>{$ ctrl.name $}</h6>
+      </div>
+    </div>
+    <div class="input-daterange" data-provide="datepicker">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="offer-start-datepicker">Start date</label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <span class="add-on input-group-addon">
+              <span class="fa fa-calendar"></span>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              id="offer-start-datepicker"
+              placeholder="Select date"
+              ng-model="ctrl.startDate"
+              required
+            >
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="offer-end-datepicker">End date</label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <span class="add-on input-group-addon">
+              <span class="fa fa-calendar"></span>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              id="offer-end-datepicker"
+              placeholder="Select date"
+              ng-model="ctrl.endDate"
+              required
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': offerForm.$dirty && !offerForm.offerStartTime.$valid }">
+      <label class="col-sm-2 control-label" for="offer-start-time">Start time</label>
+      <div class="col-sm-9">
+        <input
+          name="offerStartTime"
+          class="form-control"
+          id="offer-start-time"
+          placeholder="9 AM"
+          ng-model="ctrl.startTime"
+          ng-pattern="ctrl.hourPattern"
+          required
+        >
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': offerForm.$dirty && !offerForm.offerEndTime.$valid }">
+      <label class="col-sm-2 control-label" for="offer-end-time">End time</label>
+      <div class="col-sm-9">
+        <input
+          name="offerEndTime"
+          class="form-control"
+          id="offer-end-time"
+          placeholder="9 AM"
+          ng-model="ctrl.endTime"
+          ng-pattern="ctrl.hourPattern"
+          required
+        >
+        <p class="help-block">Start and end time should be whole hours.</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="offer-server-config">Server config</label>
+      <div class="col-sm-9">
+        <textarea
+          class="form-control"
+          id="offer-server-config"
+          cols="30"
+          rows="10"
+          ng-model="ctrl.config"
+          required
+        >
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="offer-cost">Cost</label>
+        <div class="col-sm-9">
+          <input
+            class="form-control"
+            id="offer-cost"
+            ng-model="ctrl.cost"
+            required
+          >
+        </div>
+      </div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      ng-show="offerForm.$error.required"
+    >Some required data is missing.</div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      ng-show="offerForm.$dirty && !offerForm.$valid"
+    >The hours entered do not match the required format.</div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button" 
+    class="btn btn-primary"
+    ng-disabled="offerForm.$dirty && !offerForm.$valid"
+    ng-click="ctrl.createOffer()">Create offer</button>
+</div>

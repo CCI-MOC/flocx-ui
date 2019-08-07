@@ -46,7 +46,7 @@ class RestApiTests(test.TestCase):
     def test_get_offer(self, mock_offer_get):
         testData = get_test_data('offer')
         mock_offer_get.return_value = testData
-        offer_id = testData['marketplace_offer_id']
+        offer_id = 'uuid'
 
         rf = RequestFactory()
         request = rf.get('/api/flocx/offer/{}'.format(offer_id))

@@ -53,7 +53,14 @@ $ docker-compose up
 
 #### The server should now be running at: `http://localhost:8000`
 
-2. Login using development credentials:
+2. Configure the ironic-ui service and endpoint
+
+```sh
+$ openstack service create --name ironic --description ironic baremetal
+$ openstack endpoint create ironic public http://baremetal
+```
+
+3. Login to horizon using development credentials:
 
 **Username**: admin
 

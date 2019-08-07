@@ -9,7 +9,7 @@ from flocx_ui.test.tests.helpers import get_test_data, MockResponse
 mock_request = test.TestCase.mock_rest_request()
 mock_request.user.token.id = 'auth_token'
 
-class RestApiTests(test.TestCase):
+class ServiceTests(test.TestCase):
     @mock.patch('flocx_ui.api.flocx.get')
     def test_get_offers(self, mock_get):
         testData = get_test_data('offer_list')
@@ -25,23 +25,25 @@ class RestApiTests(test.TestCase):
 
     @mock.patch('flocx_ui.api.flocx.post')
     def test_create_offer(self, mock_post):
-        testData = get_test_data('offer')
+        testOffer = get_test_data('offer')
+        testOfferBytes = str.encode(json.dumps(testOffer))
 
         mock_response = MockResponse()
-        string_data = json.dumps(testData)
+        string_data = json.dumps(testOffer)
         mock_response.status_code = 201
         mock_response.content = string_data
 
         mock_post.return_value = mock_response
 
-        output = offer_create(mock_request, testData)
-        self.assertEqual(output, testData)
+        output = offer_create(mock_request, testOfferBytes)
+        self.assertEqual(output, testOffer)
 
     def test_create_invalid_offer(self):
         testOffer = get_test_data('invalid_offer')
+        testOfferBytes = str.encode(json.dumps(testOffer))
 
         try:
-            offer_create(mock_request, testOffer)
+            offer_create(mock_request, testOfferBytes)
             self.fail() # Above code should fail
         except AjaxError as err:
             status_code, msg = err.http_status, str(err)
@@ -51,7 +53,7 @@ class RestApiTests(test.TestCase):
     @mock.patch('flocx_ui.api.flocx.get')
     def test_get_offer(self, mock_get):
         testOffer = get_test_data('offer')
-        testId = testOffer['marketplace_offer_id']
+        testId = 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' # Some random uuid
 
         mock_response = MockResponse()
         string_data = json.dumps(testOffer)
