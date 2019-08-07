@@ -58,8 +58,8 @@
 
     function filter (contract) {
       // Filter out depending on the active pane and the contract status
-      if (ctrl.pane === 'expired') {
-        return contract.status === 'expired';
+      if (ctrl.pane === expiredStatus) {
+        return contract.status === expiredStatus;
       }
       return contract.status !== expiredStatus;
     }
