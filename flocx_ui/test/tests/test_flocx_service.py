@@ -78,6 +78,19 @@ class ServiceTests(test.TestCase):
             self.assertEqual(msg, 'Invalid Offer id.')
 
     @mock.patch('flocx_ui.api.flocx_market.get')
+    def test_get_bids(self, mock_get):
+        testData = get_test_data('bid_list')
+
+        mock_response = MockResponse()
+        string_data = json.dumps(testData)
+        mock_response.content = string_data
+
+        mock_get.return_value = mock_response
+
+        output = flocx_market.bid_list(mock_request)
+        self.assertEqual(output, testData)
+
+    @mock.patch('flocx_ui.api.flocx_market.get')
     def test_get_contracts(self, mock_get):
         testData = get_test_data('contract_list')
 

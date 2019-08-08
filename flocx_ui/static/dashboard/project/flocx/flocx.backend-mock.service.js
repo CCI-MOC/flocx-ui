@@ -59,6 +59,24 @@
       }
     ];
 
+    var sampleBids = [
+      {
+        marketplace_bid_id: "8f9d6482-e308-41af-acef-5a415a636d5d",
+        project_id: "4d02370751104210bc5de88a4d9898f5",
+        server_quantity: 80,
+        start_time: "2019-07-24T13:59:14",
+        end_time: "2019-07-24T13:59:14",
+        duration: 16400,
+        status: "active",
+        server_config_query: {
+          foo: "bar"
+        },
+        cost: 11.0,
+        created_at: "2019-08-01T16:56:34",
+        updated_at: "2019-08-07T18:24:18"
+      }
+    ];
+
     var sampleContracts = [
       {
         contract_id: "b711b1ca-a77e-4392-abcd-dc84c4f469ac",
@@ -100,8 +118,13 @@
       $httpBackend.whenGET('/api/flocx/offer/')
         .respond(responseCode.SUCCESS, sampleOffers);
 
+      // Create offer
       $httpBackend.whenPOST('/api/flocx/offer/')
         .respond(responseCode.SUCCESS, sampleOffers[0]);
+
+      // Get bids
+      $httpBackend.whenGET('/api/flocx/bid/')
+        .respond(responseCode.SUCCESS, sampleBids);
 
       // Get contracts
       $httpBackend.whenGET('/api/flocx/contract/')

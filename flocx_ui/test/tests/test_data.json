@@ -89,6 +89,38 @@
     "status": "Error",
     "message": "Invalid or insufficient input parameters. Cannot create offer."
   },
+  "bid_list": [
+    {
+      "marketplace_bid_id": "4ed1fa43-5983-4a01-b4dd-5b3db5b76d46",
+      "project_id": "4d02370751104210bc5de88a4d9898f5",
+      "server_quantity": 80,
+      "start_time": "2019-07-24T13:59:14",
+      "end_time": "2019-07-24T13:59:14",
+      "duration": 16400,
+      "status": "expired",
+      "server_config_query": {
+        "foo": "bar"
+      },
+      "cost": 11.0,
+      "created_at": "2019-08-01T16:56:25",
+      "updated_at": "2019-08-07T18:24:18"
+    },
+    {
+      "marketplace_bid_id": "8f9d6482-e308-41af-acef-5a415a636d5d",
+      "project_id": "4d02370751104210bc5de88a4d9898f5",
+      "server_quantity": 80,
+      "start_time": "2019-07-24T13:59:14",
+      "end_time": "2019-07-24T13:59:14",
+      "duration": 16400,
+      "status": "active",
+      "server_config_query": {
+        "foo": "bar"
+      },
+      "cost": 11.0,
+      "created_at": "2019-08-01T16:56:34",
+      "updated_at": "2019-08-07T18:24:18"
+    }
+  ],
   "contract_list": [
     {
       "contract_id": "b711b1ca-a77e-4392-abcd-dc84c4f469ac",

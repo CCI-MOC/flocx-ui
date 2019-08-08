@@ -1,0 +1,32 @@
+<div ng-controller="BidListController as ctrl">
+  <div class="col-lg-10">
+    <h3 style="margin: 24px 0;">Bids</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Node name</th>
+          <th scope="col">Status</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">End Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="bid in ctrl.bids">
+          <td>{$ bid.marketplace_bid_id $}</td>
+          <td>{$ bid.status $}</td>
+          <td>{$ bid.server_quantity $}</td>
+          <td>{$ bid.start_time $}</td>
+          <td>{$ bid.end_time $}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <b>Displaying {$ ctrl.bids.length $} items</b>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

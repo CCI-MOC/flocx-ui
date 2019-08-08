@@ -55,6 +55,18 @@ class RestApiTests(test.TestCase):
         response = offerAPI.get(request, offer_id)
         self.assertEqual(response.json, testData)
 
+    @mock.patch('flocx_ui.api.flocx_market.bid_list')
+    def test_get_bids(self, mock_bid_list):
+        testData = get_test_data('bid_list')
+        mock_bid_list.return_value = testData
+
+        rf = RequestFactory()
+        request = rf.get('/api/flocx/bid/')
+
+        bidsAPI = api.Bids()
+        response = bidsAPI.get(request)
+        self.assertEqual(response.json, testData)
+
     @mock.patch('flocx_ui.api.flocx_market.contract_list')
     def test_get_contracts(self, mock_contract_list):
         testData = get_test_data('contract_list')

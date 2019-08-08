@@ -61,6 +61,17 @@
           flocxBackendMockService.flush();
         });
 
+        it('getBids', function (done) {
+          flocxAPI.getBids()
+            .then(function (bids) {
+              expect(bids).toBeDefined();
+              done();
+            })
+            .catch(fail);
+
+          flocxBackendMockService.flush();
+        });
+
         it('getContracts', function (done) {
           flocxAPI.getContracts()
             .then(function (contracts) {

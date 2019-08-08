@@ -45,6 +45,16 @@ def offer_get(request, offer_id):
     data = response.json()
     return data
 
+def bid_list(request):
+    """Retrieve a list of bids
+
+    :param request: HTTP request
+    :return: A list of bids
+    """
+    response = get('/bid', token=request.user.token.id)
+    data = response.json()
+    return data
+
 def contract_list(request):
     """Retrieve a list of contracts
 
