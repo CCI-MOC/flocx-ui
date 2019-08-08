@@ -11,16 +11,12 @@
 {% endblock %}
 
 {% block page_header %}
-  <ng-include
-    src="'{{ STATIC_URL }}dashboard/project/flocx/page-header/page-header.html'">
-  </ng-include>
+  <h1>Flocx</h1>
+  <br>
 {% endblock page_header %}
 
 {% block main %}
   <ng-include
-    src="'{{ STATIC_URL }}dashboard/project/flocx/node-list/node-list.html'">
-  </ng-include>
-  <ng-include
-    src="'{{ STATIC_URL }}dashboard/project/flocx/contract-list/contract-list.html'">
+    src="'{{ STATIC_URL }}dashboard/project/flocx/tab-navigation/tab-navigation.html'">
   </ng-include>
 {% endblock %}

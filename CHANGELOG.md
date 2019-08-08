@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Controller to handle tab-based navigation
+
+### Removed
+
+- Unnecessary page header html template
+
 ## [1.1.0] - 2019-08-08
 
 ### Added
