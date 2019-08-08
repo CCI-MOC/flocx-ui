@@ -10,4 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/v1', v1);
 
-app.listen(80);
+const listener = app.listen(80, () => {
+  // eslint-disable-next-line no-console
+  console.log(`Listening on port: ${listener.address().port}`);
+});

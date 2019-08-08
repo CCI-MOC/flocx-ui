@@ -59,6 +59,29 @@
     },
     "cost": 11
   },
+  "provider_offer": {
+    "resource_type": "ironic_node",
+    "resource_uuid": "9d367d16-314b-419e-913c-5bb8d034475a",
+    "start_date": "2019-07-24 13:59:14",
+    "end_date": "2019-07-24 13:59:14",
+    "properties": {
+      "memory_gb": 10240,
+      "cpu_arch": "x86_64",
+      "cpu_physical_count": 4,
+      "cpu_core_count": 16,
+      "cpu_ghz": 3,
+      "disks": [
+        {
+          "size_gb": 500,
+          "model": "YOYODYNE 1234"
+        },
+        {
+          "size_gb": 1024,
+          "model": "evo840 ssd"
+        }
+      ]
+    }
+  },
   "invalid_offer": {
     "this_is_invalid": true
   },

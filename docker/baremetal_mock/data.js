@@ -1,5 +1,9 @@
 const uuid = require('uuid/v4');
 
+const memoized = {
+  uuid: []
+};
+
 const randomProperties = () => {
   const possibilities = [
     {
@@ -28,11 +32,19 @@ const randomProperties = () => {
   return possibilities[randomIndex];
 };
 
-const constructNode = (n = 1) => {
+const memoizedUUID = (n = 1) => {
+  if (!memoized.uuid[n - 1]) {
+    memoized.uuid[n - 1] = uuid();
+  }
+
+  return memoized.uuid[n - 1];
+};
+
+const constructNode = (n = 1, projectId, uuid) => {
   const node = {
-    uuid: uuid(),
+    uuid: uuid || memoizedUUID(n),
     last_error: null,
-    properties: randomProperties()
+    properties: Object.assign({ project_owner_id: projectId }, randomProperties())
   };
 
   if (n > 1) {
@@ -41,11 +53,18 @@ const constructNode = (n = 1) => {
   return node;
 };
 
-const data = {
-  node_list: {
-    nodes: constructNode(8)
-  },
-  node: constructNode()
+const getNode = (id, projectId) => {
+  return constructNode(1, projectId, id);
 };
 
-module.exports = data;
+const createData = (projectId) => {
+  return {
+    node_list: {
+      nodes: constructNode(8, projectId)
+    },
+    node: constructNode(1, projectId),
+    getNode: (id) => getNode(id, projectId)
+  };
+};
+
+module.exports = createData;

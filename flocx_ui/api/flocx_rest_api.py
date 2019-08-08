@@ -6,7 +6,8 @@ from openstack_dashboard.api.rest import urls
 
 from openstack_dashboard.api.rest import utils as rest_utils
 
-from flocx_ui.api import flocx
+from flocx_ui.api import flocx_market
+from flocx_ui.api import flocx_provider
 from flocx_ui.api.schema import UUID_REGEX
 
 @urls.register
@@ -20,7 +21,7 @@ class Offers(generic.View):
         :param request: HTTP request
         :return: List of offers
         """
-        offers = flocx.offer_list(request)
+        offers = flocx_market.offer_list(request)
         return offers
 
     @rest_utils.ajax(data_required=True)
@@ -31,7 +32,7 @@ class Offers(generic.View):
         :return: The created offer
         """
         offer_data = request.body
-        offer = flocx.offer_create(request, offer_data)
+        offer = flocx_provider.offer_create(request, offer_data)
         return offer
 
 class Offer(generic.View):
@@ -45,7 +46,7 @@ class Offer(generic.View):
         :param offer_id: Offer uuid
         :return: The offer details
         """
-        offer = flocx.offer_get(request, offer_id)
+        offer = flocx_market.offer_get(request, offer_id)
         return offer
 
 @urls.register
@@ -60,5 +61,5 @@ class Contracts(generic.View):
         :param request: HTTP request
         :return: List of contracts
         """
-        offers = flocx.contract_list(request)
+        offers = flocx_market.contract_list(request)
         return offers

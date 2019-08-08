@@ -2,15 +2,18 @@ version: '3'
 services:
   baremetal:
     build: ./docker/baremetal_mock
-    volumes: 
+    environment:
+      - KEYSTONE_BASE_URL=http://host.docker.internal:5000
+    volumes:
       - ./docker/baremetal_mock:/usr/src/app
   horizon:
     build: .
     environment:
       - KEYSTONE_HOST=host.docker.internal
-      - FLOCX_API_HOST=http://host.docker.internal
+      - FLOCX_MARKET_HOST=http://host.docker.internal
+      - FLOCX_PROVIDER_HOST=http://host.docker.internal
       - TOX_TESTENV_PASSENV=KEYSTONE_HOST FLOCX_*
-    volumes: 
+    volumes:
       - .:/flocx-ui
     ports:
         - "8000:80"

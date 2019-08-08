@@ -2,15 +2,17 @@ import json
 from unittest import mock
 
 from openstack_dashboard.test import helpers as test
+from openstack_dashboard.api.rest.utils import AjaxError
 
-from flocx_ui.api.flocx import * # pylint: disable=wildcard-import,unused-wildcard-import
+from flocx_ui.api import flocx_market
+from flocx_ui.api import flocx_provider
 from flocx_ui.test.tests.helpers import get_test_data, MockResponse
 
 mock_request = test.TestCase.mock_rest_request()
 mock_request.user.token.id = 'auth_token'
 
 class ServiceTests(test.TestCase):
-    @mock.patch('flocx_ui.api.flocx.get')
+    @mock.patch('flocx_ui.api.flocx_market.get')
     def test_get_offers(self, mock_get):
         testData = get_test_data('offer_list')
 
@@ -20,12 +22,12 @@ class ServiceTests(test.TestCase):
 
         mock_get.return_value = mock_response
 
-        output = offer_list(mock_request)
+        output = flocx_market.offer_list(mock_request)
         self.assertEqual(output, testData)
 
-    @mock.patch('flocx_ui.api.flocx.post')
+    @mock.patch('flocx_ui.api.flocx_provider.post')
     def test_create_offer(self, mock_post):
-        testOffer = get_test_data('offer')
+        testOffer = get_test_data('provider_offer')
         testOfferBytes = str.encode(json.dumps(testOffer))
 
         mock_response = MockResponse()
@@ -35,7 +37,7 @@ class ServiceTests(test.TestCase):
 
         mock_post.return_value = mock_response
 
-        output = offer_create(mock_request, testOfferBytes)
+        output = flocx_provider.offer_create(mock_request, testOfferBytes)
         self.assertEqual(output, testOffer)
 
     def test_create_invalid_offer(self):
@@ -43,14 +45,14 @@ class ServiceTests(test.TestCase):
         testOfferBytes = str.encode(json.dumps(testOffer))
 
         try:
-            offer_create(mock_request, testOfferBytes)
+            flocx_provider.offer_create(mock_request, testOfferBytes)
             self.fail() # Above code should fail
         except AjaxError as err:
             status_code, msg = err.http_status, str(err)
             self.assertEqual(status_code, 400)
             self.assertEqual(msg, 'Invalid or insufficient input parameters. Cannot create offer.')
 
-    @mock.patch('flocx_ui.api.flocx.get')
+    @mock.patch('flocx_ui.api.flocx_market.get')
     def test_get_offer(self, mock_get):
         testOffer = get_test_data('offer')
         testId = 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' # Some random uuid
@@ -62,20 +64,20 @@ class ServiceTests(test.TestCase):
 
         mock_get.return_value = mock_response
 
-        output = offer_get(mock_request, testId)
+        output = flocx_market.offer_get(mock_request, testId)
         self.assertEqual(output, testOffer)
 
     def test_get_offer_invalid_id(self):
         invalid_offer_id = 'invalid_offer'
         try:
-            offer_get(mock_request, invalid_offer_id)
+            flocx_market.offer_get(mock_request, invalid_offer_id)
             self.fail() # Above code should fail
         except AjaxError as err:
             status_code, msg = err.http_status, str(err)
             self.assertEqual(status_code, 400)
             self.assertEqual(msg, 'Invalid Offer id.')
 
-    @mock.patch('flocx_ui.api.flocx.get')
+    @mock.patch('flocx_ui.api.flocx_market.get')
     def test_get_contracts(self, mock_get):
         testData = get_test_data('contract_list')
 
@@ -85,5 +87,5 @@ class ServiceTests(test.TestCase):
 
         mock_get.return_value = mock_response
 
-        output = contract_list(mock_request)
+        output = flocx_market.contract_list(mock_request)
         self.assertEqual(output, testData)
