@@ -1,6 +1,6 @@
 {
   "name": "flocx-ui",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Flocx plugin for horizon to show and create bids, offers, and contracts",
   "scripts": {
     "postinstall": "if [ ! -d .tox ] || [ ! -d .tox/py37 ]; then tox -epy37 --notest; fi",
