@@ -103,6 +103,21 @@
         </textarea>
       </div>
     </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label" for="offer-cost">Cost</label>
+      <div class="col-sm-4">
+        <input
+          name="offerCost"
+          class="form-control"
+          id="offer-cost"
+          placeholder="{$ ctrl.defaultCost $}"
+          ng-model="ctrl.cost"
+          ng-pattern="ctrl.costPattern"
+          style="max-width: 120px;"
+          required
+        >
+      </div>
+    </div>
     <div
       class="alert alert-danger"
       role="alert"
@@ -111,8 +126,13 @@
     <div
       class="alert alert-danger"
       role="alert"
-      ng-show="offerForm.$dirty && !offerForm.$valid"
+      ng-show="offerForm.$dirty && !(offerForm.offerStartTime.$valid && offerForm.offerEndTime.$valid)"
     >The hours entered do not match the required format.</div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      ng-show="offerForm.$dirty && !offerForm.offerCost.$valid"
+    >The cost eneterd does not match the required format.</div>
   </form>
 </div>
 <div class="modal-footer">

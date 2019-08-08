@@ -22,6 +22,8 @@
 
     $provide.constant('horizon.dashboard.project.flocx.hourRegex', /^\d{1,2} [aApP][mM]$/);
 
+    $provide.constant('horizon.dashboard.project.flocx.costRegex', /^\d{1,3}$/);
+
     $provide.constant('horizon.dashboard.project.flocx.defaultOfferDaysDifference', 7);
 
     $provide.constant('horizon.dashboard.project.flocx.defaultOfferCost', 10);

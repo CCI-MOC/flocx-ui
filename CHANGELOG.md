@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Controller to handle tab-based navigation
+- An input in the "create offer" modal to specify offer cost
+
+### Fixed
+
+- An issue with the Ironic mock in which the `node_modules` would not be installed correctly
+- Small bugs with the create offer modal
 
 ### Removed
 
