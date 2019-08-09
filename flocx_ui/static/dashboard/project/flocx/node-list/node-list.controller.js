@@ -78,24 +78,19 @@
      * @returns {void}
      */
     function mergeOffersAndNodes () {
-      var merged = [];
+      var merged = {};
 
       ctrl.nodes.forEach(function (node) {
-        merged.push(convertNode(node));
+        var convertedNode = convertNode(node);
+        merged[node.uuid] = convertedNode;
       });
 
       ctrl.offers.forEach(function (offer) {
         var convertedOffer = convertOffer(offer);
-        if (merged[convertedOffer.uuid] !== undefined) {
-          merged[convertedOffer.uuid].type = 'offer';
-          merged[convertedOffer.uuid].status = convertedOffer.status;
-          merged[convertedOffer.uuid].expires = convertedOffer.expires;
-        } else {
-          merged.push(convertedOffer);
-        }
+        merged[convertedOffer.uuid] = convertedOffer;
       });
 
-      ctrl.merged = merged;
+      ctrl.merged = Object.values(merged);
     }
 
     /**
@@ -184,6 +179,7 @@
       return {
         type: 'offer',
         name: offer.server_id,
+        uuid: offer.server_id,
         status: status || '?',
         cpus: cpus || '?',
         ram: memory || '?',

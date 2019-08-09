@@ -13,8 +13,9 @@
     '$uibModalInstance',
     'horizon.app.core.openstack-service-api.flocx',
     'horizon.dashboard.project.flocx.hourRegex',
+    'horizon.dashboard.project.flocx.costRegex',
     'horizon.dashboard.project.flocx.defaultOfferDaysDifference',
-    'horizon.framework.util.uuid.service',
+    'horizon.dashboard.project.flocx.defaultOfferCost',
     'horizon.framework.widgets.toast.service',
     'node'
   ];
@@ -23,8 +24,9 @@
                                 $uibModalInstance,
                                 flocx,
                                 hourRegex,
+                                costRegex,
                                 offerDaysDifference,
-                                uuid,
+                                offerCost,
                                 toastService,
                                 node) {
     var ctrl = this;
@@ -32,11 +34,16 @@
     // Import time filter from date.filter.js
     var dateToUTC = $filter('dateToUTC');
 
+    var localeOptions = {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric'
+    };
     var today = new Date();
     var endDateMs = (new Date()).setDate(today.getDate() + offerDaysDifference);
     var endDate = new Date(endDateMs);
-    var todayString = today.toLocaleDateString();
-    var endDateString = endDate.toLocaleDateString();
+    var todayString = today.toLocaleDateString(undefined, localeOptions);
+    var endDateString = endDate.toLocaleDateString(undefined, localeOptions);
     var todayTimeString = getNextHourString(today);
     var endDateTimeString = getNextHourString(endDate);
     var config = node.properties;
@@ -46,8 +53,12 @@
     ctrl.endDate = endDateString;
     ctrl.startTime = todayTimeString;
     ctrl.endTime = endDateTimeString;
-    ctrl.hourPattern = hourRegex;
     ctrl.config = JSON.stringify(config, undefined, 2);
+    ctrl.cost = offerCost;
+
+    ctrl.defaultCost = offerCost;
+    ctrl.hourPattern = hourRegex;
+    ctrl.costPattern = costRegex;
 
     /**
      * @description Get the next hour after a given date as a string of the form: [hh AM/PM]
@@ -96,14 +107,15 @@
       var offer;
 
       try {
-        var configJSON = JSON.parse(ctrl.config);
+        var propertiesJSON = JSON.parse(ctrl.config);
+        propertiesJSON.floor_price = ctrl.cost;
 
         offer = {
           resource_type: 'ironic_node',
           resource_uuid: node.uuid,
           start_date: convertToDatetime(ctrl.startDate, ctrl.startTime),
           end_date: convertToDatetime(ctrl.endDate, ctrl.endTime),
-          properties: configJSON
+          properties: propertiesJSON
         };
       } catch (err) {
         return displayOfferCreationError(err);
