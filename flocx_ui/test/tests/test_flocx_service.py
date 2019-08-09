@@ -41,16 +41,39 @@ class ServiceTests(test.TestCase):
         self.assertEqual(output, testOffer)
 
     def test_create_invalid_offer(self):
-        testOffer = get_test_data('invalid_offer')
+        testOffer = get_test_data('invalid')
         testOfferBytes = str.encode(json.dumps(testOffer))
 
         try:
             flocx_provider.offer_create(mock_request, testOfferBytes)
             self.fail() # Above code should fail
         except AjaxError as err:
-            status_code, msg = err.http_status, str(err)
-            self.assertEqual(status_code, 400)
-            self.assertEqual(msg, 'Invalid or insufficient input parameters. Cannot create offer.')
+            self.assertEqual(err.http_status, 400)
+
+    @mock.patch('flocx_ui.api.flocx_market.post')
+    def test_create_bid(self, mock_post):
+        testBid = get_test_data('bid')
+        testBidBytes = str.encode(json.dumps(testBid))
+
+        mock_response = MockResponse()
+        string_data = json.dumps(testBid)
+        mock_response.status_code = 201
+        mock_response.content = string_data
+
+        mock_post.return_value = mock_response
+
+        output = flocx_market.bid_create(mock_request, testBidBytes)
+        self.assertEqual(output, testBid)
+
+    def test_create_invalid_bid(self):
+        testBid = get_test_data('invalid')
+        testBidBytes = str.encode(json.dumps(testBid))
+
+        try:
+            flocx_market.bid_create(mock_request, testBidBytes)
+            self.fail() # Above code should fail
+        except AjaxError as err:
+            self.assertEqual(err.http_status, 400)
 
     @mock.patch('flocx_ui.api.flocx_market.get')
     def test_get_offer(self, mock_get):
@@ -73,9 +96,7 @@ class ServiceTests(test.TestCase):
             flocx_market.offer_get(mock_request, invalid_offer_id)
             self.fail() # Above code should fail
         except AjaxError as err:
-            status_code, msg = err.http_status, str(err)
-            self.assertEqual(status_code, 400)
-            self.assertEqual(msg, 'Invalid Offer id.')
+            self.assertEqual(err.http_status, 400)
 
     @mock.patch('flocx_ui.api.flocx_market.get')
     def test_get_bids(self, mock_get):

@@ -102,7 +102,7 @@ def validate_offer_status(status):
     return Schema(And(Use(lambda s: [s]), status_enum)).validate(status)
 
 @return_boolean_decorator
-def validate_offer(offer):
+def validate_offer(offer, **_kwargs):
     """Determines if an offer dictionary is valid
 
     :param offer: The offer to be validated
@@ -144,3 +144,25 @@ def validate_provider_offer(offer, **_kwargs):
         'end_date': validate_date,
         'properties': object
     }).validate(offer)
+
+@return_boolean_decorator
+def validate_bid(bid, **_kwargs):
+    """Determines if a bid dictionary is valid
+
+    :param bid: The bid to be validated
+    :param **kwargs: See below
+    :return: True if the schema is valid. Raises a SchemaError otherwise
+
+    :Keyword Arguments:
+        * return_boolean:
+            Whether to raise a SchemaError or return false if the bid is invalid
+    """
+    return Schema({
+        'start_time': validate_date,
+        'end_time': validate_date,
+        'duration': Or(int, float),
+        'server_quantity': int,
+        'status': validate_offer_status,
+        'server_config_query': object,
+        'cost': Or(int, float)
+    }).validate(bid)

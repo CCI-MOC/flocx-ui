@@ -1,6 +1,6 @@
-from openstack_dashboard.api.rest.utils import AjaxError
 from flocx_ui.api import schema
 from flocx_ui.api.utils import generic_market_request as generic_request
+from flocx_ui.api.utils import validate_data_with
 
 def get(path, **kwargs):
     """An alias for generic_request with the type set to 'GET'
@@ -31,17 +31,15 @@ def offer_list(request):
     data = response.json()
     return data
 
+@validate_data_with(None, schema.validate_uuid)
 def offer_get(request, offer_id):
     """Get an offer
 
-    :param offer_id: The offer id used to get the offer details
     :param request: HTTP request
-    :raises AjaxError: If the offer_id is invalid
+    :param offer_id: The offer id used to get the offer details
     :return: The offer associated with the offer_id
     """
-    if not schema.validate_uuid(offer_id, return_boolean=True):
-        raise AjaxError(400, 'Invalid Offer id.')
-    response = get('/offer/%r', token=request.user.token.id)
+    response = get('/offer/{}'.format(offer_id), token=request.user.token.id)
     data = response.json()
     return data
 
@@ -52,6 +50,18 @@ def bid_list(request):
     :return: A list of bids
     """
     response = get('/bid', token=request.user.token.id)
+    data = response.json()
+    return data
+
+@validate_data_with(None, schema.validate_bid)
+def bid_create(request, bid):
+    """Create a bid
+
+    :param request: HTTP Request
+    :param bid: The bid to be created
+    :return: The bid that was created
+    """
+    response = post('/bid', json=bid, token=request.user.token.id)
     data = response.json()
     return data
 

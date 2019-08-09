@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Tab to view existing bids
+- Service endpoints to create bids along with necessary schema
+- "Create bid" modal that takes variable criteria
+- Methods to the JavaScript flocx API service that allow for creating bids
+
+### Changed
+
+- The way that schema errors are handled. It is now easier from the UI to see exactly what data is incorrect
+- Certain date logic that was previously in the `contract.controller.js` to be part of the date filters
+- Certain data used in tests
 
 ## [1.1.1] - 2019-08-08
 

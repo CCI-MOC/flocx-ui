@@ -82,12 +82,8 @@
       ]
     }
   },
-  "invalid_offer": {
+  "invalid": {
     "this_is_invalid": true
-  },
-  "invalid_offer_error": {
-    "status": "Error",
-    "message": "Invalid or insufficient input parameters. Cannot create offer."
   },
   "bid_list": [
     {
@@ -121,6 +117,17 @@
       "updated_at": "2019-08-07T18:24:18"
     }
   ],
+  "bid": {
+    "server_quantity": 80,
+    "start_time": "2019-07-24 13:59:14",
+    "end_time": "2019-07-24 13:59:14",
+    "duration": 16400,
+    "status": "available",
+    "server_config_query": {
+      "foo": "bar"
+    },
+    "cost": 11.0
+  },
   "contract_list": [
     {
       "contract_id": "b711b1ca-a77e-4392-abcd-dc84c4f469ac",

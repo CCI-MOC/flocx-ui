@@ -100,6 +100,7 @@
       flush: flush,
       postTest: postTest,
       _sampleOffers: sampleOffers,
+      _sampleBids: sampleBids,
       _sampleContracts: sampleContracts
     };
 
@@ -125,6 +126,10 @@
       // Get bids
       $httpBackend.whenGET('/api/flocx/bid/')
         .respond(responseCode.SUCCESS, sampleBids);
+
+      // Create bid
+      $httpBackend.whenPOST('/api/flocx/bid/')
+        .respond(responseCode.SUCCESS, sampleBids[0]);
 
       // Get contracts
       $httpBackend.whenGET('/api/flocx/contract/')

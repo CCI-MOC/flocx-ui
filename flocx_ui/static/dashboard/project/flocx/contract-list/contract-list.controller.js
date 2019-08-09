@@ -49,11 +49,7 @@
 
     function filterContracts (contracts) {
       // Filter the contracts depending on the active tab
-      ctrl.contracts = contracts.filter(filter).map(function (contract) {
-        contract.start_time = new Date(contract.start_time).toLocaleString();
-        contract.end_time = new Date(contract.end_time).toLocaleString();
-        return contract;
-      });
+      ctrl.contracts = contracts.filter(filter);
     }
 
     function filter (contract) {

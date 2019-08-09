@@ -31,8 +31,9 @@
                                 node) {
     var ctrl = this;
 
-    // Import time filter from date.filter.js
-    var dateToUTC = $filter('dateToUTC');
+    // Import filters from date.filter.js
+    var nextHourString = $filter('nextHourString');
+    var convertToDatetime = $filter('convertToDatetime');
 
     var localeOptions = {
       month: '2-digit',
@@ -44,8 +45,8 @@
     var endDate = new Date(endDateMs);
     var todayString = today.toLocaleDateString(undefined, localeOptions);
     var endDateString = endDate.toLocaleDateString(undefined, localeOptions);
-    var todayTimeString = getNextHourString(today);
-    var endDateTimeString = getNextHourString(endDate);
+    var todayTimeString = nextHourString(today);
+    var endDateTimeString = nextHourString(endDate);
     var config = node.properties;
 
     ctrl.name = node.name || node.uuid;
@@ -59,34 +60,6 @@
     ctrl.defaultCost = offerCost;
     ctrl.hourPattern = hourRegex;
     ctrl.costPattern = costRegex;
-
-    /**
-     * @description Get the next hour after a given date as a string of the form: [hh AM/PM]
-     * @param {Date} date The JavaScript date given
-     * @returns {string} A string interpretation of the next hour
-     */
-    function getNextHourString (date) {
-      date.setHours(date.getHours() + Math.ceil(date.getMinutes() / 60));
-      date.setMinutes(0);
-
-      var timeString = date.toLocaleTimeString([], { hour: 'numeric' });
-      return timeString;
-    }
-
-    /**
-     * @description Convert a JavaScript date string string to a MySQL compatible format
-     * @param {string} dateString The date used in the created date
-     * @param {string} timeString The time used in the created date
-     *
-     * @returns {string} A MySQL compatible datetime string
-     */
-    function convertToDatetime (dateString, timeString) {
-      // Add `:00` to the time (from 9 AM to 9:00 AM) to make it compatible with JavaScript Date
-      var modifiedTimeString = timeString.slice(0, -3) + ':00' + timeString.slice(-3);
-      var compatibleDate = dateString + ' ' + modifiedTimeString;
-
-      return dateToUTC(new Date(compatibleDate));
-    }
 
     /**
      * @description Display a notification when an offer creation error occurs
@@ -123,7 +96,7 @@
 
       // Attempt to create the offer
       return flocx.createOffer(offer)
-        .then(function(createdOffer) {
+        .then(function (createdOffer) {
           $uibModalInstance.close(createdOffer);
         })
         .catch(function (error) {
