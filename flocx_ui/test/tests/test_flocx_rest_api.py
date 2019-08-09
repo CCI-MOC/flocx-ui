@@ -12,7 +12,7 @@ class RestApiTests(test.TestCase):
     flocx service methods and that validation of certain data from
     the endpoints are in fact validated and will error correctly.
     """
-    @mock.patch('flocx_ui.api.flocx.offer_list')
+    @mock.patch('flocx_ui.api.flocx_market.offer_list')
     def test_get_offers(self, mock_offer_list):
         """
         Getting the /api/flocx/offer/ endpoint should return a
@@ -28,9 +28,9 @@ class RestApiTests(test.TestCase):
         response = offersAPI.get(request)
         self.assertEqual(response.json, testData)
 
-    @mock.patch('flocx_ui.api.flocx.offer_create')
+    @mock.patch('flocx_ui.api.flocx_provider.offer_create')
     def test_create_offer(self, mock_offer_create):
-        testData = get_test_data('offer')
+        testData = get_test_data('provider_offer')
         mock_offer_create.return_value = testData
 
         rf = RequestFactory()
@@ -42,7 +42,7 @@ class RestApiTests(test.TestCase):
         response = offersAPI.post(request)
         self.assertEqual(response.json, testData)
 
-    @mock.patch('flocx_ui.api.flocx.offer_get')
+    @mock.patch('flocx_ui.api.flocx_market.offer_get')
     def test_get_offer(self, mock_offer_get):
         testData = get_test_data('offer')
         mock_offer_get.return_value = testData
@@ -55,7 +55,7 @@ class RestApiTests(test.TestCase):
         response = offerAPI.get(request, offer_id)
         self.assertEqual(response.json, testData)
 
-    @mock.patch('flocx_ui.api.flocx.contract_list')
+    @mock.patch('flocx_ui.api.flocx_market.contract_list')
     def test_get_contracts(self, mock_contract_list):
         testData = get_test_data('contract_list')
         mock_contract_list.return_value = testData

@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2019-08-08
+
+### Added
+
+- Project id's to generated Ironic nodes in the Ironic mock
+- An endpoint to the Ironic mock to make it work with the flocx provider API
+- Schema validation for provider offer objects
+
+### Changed
+
+- Ironic mock now uses the same id for every node-list request
+- The flocx.py service into two separate services for each of the flocx API's
+- The "Create offer" modal to reflect the flocx service API changes
+- The "Create offer" modal so that the start and end dates and times are on the same line
+
 ## [1.0.2] - 2019-08-07
 
 ### Added

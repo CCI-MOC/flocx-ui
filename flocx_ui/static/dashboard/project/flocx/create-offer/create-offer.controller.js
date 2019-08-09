@@ -14,7 +14,6 @@
     'horizon.app.core.openstack-service-api.flocx',
     'horizon.dashboard.project.flocx.hourRegex',
     'horizon.dashboard.project.flocx.defaultOfferDaysDifference',
-    'horizon.dashboard.project.flocx.defaultOfferCost',
     'horizon.framework.util.uuid.service',
     'horizon.framework.widgets.toast.service',
     'node'
@@ -25,7 +24,6 @@
                                 flocx,
                                 hourRegex,
                                 offerDaysDifference,
-                                offerCost,
                                 uuid,
                                 toastService,
                                 node) {
@@ -41,7 +39,7 @@
     var endDateString = endDate.toLocaleDateString();
     var todayTimeString = getNextHourString(today);
     var endDateTimeString = getNextHourString(endDate);
-    var config = { properties: node.properties };
+    var config = node.properties;
 
     ctrl.name = node.name || node.uuid;
     ctrl.startDate = todayString;
@@ -50,7 +48,6 @@
     ctrl.endTime = endDateTimeString;
     ctrl.hourPattern = hourRegex;
     ctrl.config = JSON.stringify(config, undefined, 2);
-    ctrl.cost = offerCost;
 
     /**
      * @description Get the next hour after a given date as a string of the form: [hh AM/PM]
@@ -96,27 +93,20 @@
      * @return {promise} A promise that resolves when the offer is created
      */
     ctrl.createOffer = function() {
-      var offer, configJSON;
+      var offer;
 
       try {
-        configJSON = JSON.parse(ctrl.config);
+        var configJSON = JSON.parse(ctrl.config);
 
         offer = {
-          provider_offer_id: uuid.generate(),
-          project_id: configJSON.properties.project_id,
-          server_id: node.uuid,
-          start_time: convertToDatetime(ctrl.startDate, ctrl.startTime),
-          end_time: convertToDatetime(ctrl.endDate, ctrl.endTime),
-          server_config: ctrl.config,
-          cost: ctrl.cost
+          resource_type: 'ironic_node',
+          resource_uuid: node.uuid,
+          start_date: convertToDatetime(ctrl.startDate, ctrl.startTime),
+          end_date: convertToDatetime(ctrl.endDate, ctrl.endTime),
+          properties: configJSON
         };
       } catch (err) {
         return displayOfferCreationError(err);
-      }
-
-      if (!(configJSON.properties && configJSON.properties.project_id)) {
-        return displayOfferCreationError('No project_id defined in the server_config. ' +
-                                         'Make sure that properties.project_id is defined');
       }
 
       // Attempt to create the offer

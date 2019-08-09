@@ -102,7 +102,7 @@ def validate_offer_status(status):
     return Schema(And(Use(lambda s: [s]), status_enum)).validate(status)
 
 @return_boolean_decorator
-def validate_offer(offer, **_kwargs):
+def validate_offer(offer):
     """Determines if an offer dictionary is valid
 
     :param offer: The offer to be validated
@@ -122,4 +122,25 @@ def validate_offer(offer, **_kwargs):
         'end_time': validate_date,
         'server_config': object,
         'cost': Or(int, float)
+    }).validate(offer)
+
+@return_boolean_decorator
+def validate_provider_offer(offer, **_kwargs):
+    """Determines if a provider offer dictionary is valid
+
+    :param offer: The provider offer to be validated
+    :param **kwargs: See below
+    :raises SchemaError: If the schema is not valid
+    :return: True if the schema is valid. Raises a SchemaError otherwise
+
+    :Keyword Arguments:
+        * return_boolean:
+            Whether to raise SchemaError or return false if the offer is invalid
+    """
+    return Schema({
+        'resource_type': 'ironic_node', # This should be changed to an enum validator after devconf
+        'resource_uuid': validate_uuid,
+        'start_date': validate_date,
+        'end_date': validate_date,
+        'properties': object
     }).validate(offer)
