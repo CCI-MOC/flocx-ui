@@ -1,0 +1,9 @@
+<div ng-controller="TabNavigationController as ctrl">
+  <uib-tabset active="ctrl.active">
+    <uib-tab ng-repeat="tab in ctrl.tabs" index="$index" heading="{$ tab.title $}">
+      <ng-include
+        src="ctrl.getUrl(tab.path)">
+      </ng-include>
+    </uib-tab>
+  </uib-tabset>
+</div>
