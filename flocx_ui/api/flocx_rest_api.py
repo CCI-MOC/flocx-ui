@@ -50,6 +50,32 @@ class Offer(generic.View):
         return offer
 
 @urls.register
+class Bids(generic.View):
+
+    url_regex = r'flocx/bid/$'
+
+    @rest_utils.ajax()
+    def get(self, request):
+        """Get the list of bids
+
+        :param request: HTTP request
+        :return: List of bids
+        """
+        bids = flocx_market.bid_list(request)
+        return bids
+
+    @rest_utils.ajax()
+    def post(self, request):
+        """Create a bid
+
+        :param request: The request passed into the ajax decorator
+        :return: The created bid
+        """
+        bid_data = request.body
+        bid = flocx_market.bid_create(request, bid_data)
+        return bid
+
+@urls.register
 class Contracts(generic.View):
 
     url_regex = r'flocx/contract/$'

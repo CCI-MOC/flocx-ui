@@ -1,0 +1,218 @@
+<div class="modal-header" modal-draggable>
+  <button type="button"
+          class="close"
+          ng-click="$dismiss()"
+          aria-hidden="true"
+          aria-label="Close">
+    <span aria-hidden="true" class="fa fa-times"></span>
+  </button>
+  <h3 class="modal-title">Create a bid</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" name="bidForm" action="javascript:void(0);">
+    <div class="form-group">
+      <div class="container-fluid">
+        <div class="col-sm-5 input-daterange" data-provide="datepicker">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="bid-start-datepicker">Start date</label>
+            <div class="col-sm-8">
+              <div class="input-group">
+                <span class="add-on input-group-addon">
+                  <span class="fa fa-calendar"></span>
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="bid-start-datepicker"
+                  placeholder="Select date"
+                  ng-model="ctrl.startDate"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="bid-end-datepicker">End date</label>
+            <div class="col-sm-8">
+              <div class="input-group">
+                <span class="add-on input-group-addon">
+                  <span class="fa fa-calendar"></span>
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="bid-end-datepicker"
+                  placeholder="Select date"
+                  ng-model="ctrl.endDate"
+                  required
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="form-group" ng-class="{ 'has-error': bidForm.$dirty && !bidForm.bidStartTime.$valid }">
+            <label class="col-sm-3 control-label" for="bid-start-time">Start time</label>
+            <div class="col-sm-4">
+              <input
+                name="bidStartTime"
+                class="form-control"
+                id="bid-start-time"
+                placeholder="9 AM"
+                ng-model="ctrl.startTime"
+                ng-pattern="ctrl.hourPattern"
+                style="max-width: 120px;"
+                required
+              >
+            </div>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error': bidForm.$dirty && !bidForm.bidEndTime.$valid }">
+            <label class="col-sm-3 control-label" for="bid-end-time">End time</label>
+            <div class="col-sm-4">
+              <input
+                name="bidEndTime"
+                class="form-control"
+                id="bid-end-time"
+                placeholder="9 AM"
+                ng-model="ctrl.endTime"
+                ng-pattern="ctrl.hourPattern"
+                style="max-width: 120px;"
+                required
+              >
+            </div>
+          </div>
+        </div>
+        <p class="help-block">Start and end time should be whole hours.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <h4>Criteria</h4>
+      </div>
+      <div class="col-xs-6">
+        <button
+          type="button"
+          class="btn btn-link pull-right"
+          ng-click="ctrl.addRow()"
+        >
+          + Add Row
+        </button>
+      </div>
+    </div>
+    <!-- Headers -->
+    <div class="container-fluid">
+      <div class="col-xs-4">
+        <h6>Expression</h6>
+      </div>
+      <div class="col-xs-2">
+        <h6>Operator</h6>
+      </div>
+      <div class="col-xs-6">
+        <h6>Value</h6>
+      </div>
+    </div>
+    <!-- Matcher Fields -->
+    <div>
+      <div
+        class="container-fluid"
+        ng-repeat="criterion in ctrl.match_criteria"
+        style="margin-bottom: 24px;"
+      >
+        <div class="col-xs-4">
+          <input
+            type="text"
+            class="form-control"
+            ng-model="ctrl.match_criteria[$index][0]"
+            required
+          >
+        </div>
+        <div class="col-xs-2">
+          <select
+            class="form-control"
+            ng-options="operator.option as operator.option group by operator.group for operator in ctrl.operators track by operator.option"
+            ng-model="ctrl.match_criteria[$index][1]"
+            required
+          >
+          </select>
+        </div>
+        <div class="col-xs-6" style="display: flex;">
+          <input
+            type="text"
+            class="form-control"
+            ng-model="ctrl.match_criteria[$index][2]"
+            required
+          >
+          <button type="button"
+            class="close"
+            style="margin-left: 12px;"
+            ng-click="ctrl.removeRow($index)"
+            aria-hidden="true"
+            aria-label="Close"
+          >
+            <span aria-hidden="true" class="fa fa-times"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-5">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="bid-cost">Cost</label>
+            <div class="col-sm-5">
+              <input
+                name="bidCost"
+                class="form-control"
+                id="bid-cost"
+                ng-model="ctrl.cost"
+                ng-pattern="ctrl.costPattern"
+                required
+              >
+            </div>
+          </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="bid-quantity">Quantity</label>
+          <div class="col-sm-5">
+            <input
+              name="bidQuantity"
+              class="form-control"
+              id="bid-quantity"
+              ng-model="ctrl.quantity"
+              ng-pattern="ctrl.quantityPattern"
+              required
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      ng-show="bidForm.$error.required"
+    >Some required data is missing.</div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      ng-show="bidForm.$dirty && !(bidForm.bidStartTime.$valid && bidForm.bidEndTime.$valid)"
+    >The hours entered do not match the required format.</div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      ng-show="bidForm.$dirty && !bidForm.bidCost.$valid"
+    >The cost eneterd does not match the required format.</div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      ng-show="bidForm.$dirty && !bidForm.bidQuantity.$valid"
+    >The quantity eneterd does not match the required format.</div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button" 
+    class="btn btn-primary"
+    ng-disabled="bidForm.$dirty && !bidForm.$valid"
+    ng-click="ctrl.createBid()">Create bid</button>
+</div>

@@ -4,7 +4,9 @@
   angular
       .module('horizon.dashboard.project.flocx')
       .filter('utcToLocal', utcToLocal) // to convert the mysql datetime utc to local time
-      .filter('dateToUTC', dateToUTC); // to convert a date to a datetime string for mysql
+      .filter('dateToUTC', dateToUTC) // to convert a date to a datetime string for mysql
+      .filter('nextHourString', nextHourString) // to round to the nearest hour
+      .filter('convertToDatetime', convertToDatetime); // converts strings to datetime format
 
   utcToLocal.$inject = [
     '$filter'
@@ -49,6 +51,43 @@
       var timezone = 'utc';
 
       return $filter('date')(localDate, format, timezone);
+    };
+  }
+
+  nextHourString.$inject = [];
+
+  /**
+   * @description Get the next hour after a given date as a string of the form: [hh AM/PM]
+   *
+   * @returns {string} A string interpretation of the next hour
+   */
+  function nextHourString () {
+    return function (date) {
+      date.setHours(date.getHours() + Math.ceil(date.getMinutes() / 60));
+      date.setMinutes(0);
+
+      var timeString = date.toLocaleTimeString([], { hour: 'numeric' });
+      return timeString;
+    };
+  }
+
+  convertToDatetime.$inject = [
+    '$filter'
+  ];
+
+  /**
+   * @description Convert a JavaScript date string and time string to a MySQL compatible format
+   * @param {*} $filter The angular $filter formatter
+   *
+   * @returns {string} A MySQL compatible datetime string
+   */
+  function convertToDatetime ($filter) {
+    return function (dateString, timeString) {
+      // Add `:00` to the time (from 9 AM to 9:00 AM) to make it compatible with JavaScript Date
+      var modifiedTimeString = timeString.slice(0, -3) + ':00' + timeString.slice(-3);
+      var compatibleDate = dateString + ' ' + modifiedTimeString;
+
+      return dateToUTC($filter)(new Date(compatibleDate));
     };
   }
 }());

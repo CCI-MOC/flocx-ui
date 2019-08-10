@@ -19,6 +19,10 @@
         path: 'node-list/node-list.html'
       },
       {
+        title: 'Bids',
+        path: 'bid-list/bid-list.html'
+      },
+      {
         title: 'Contracts',
         path: 'contract-list/contract-list.html'
       }

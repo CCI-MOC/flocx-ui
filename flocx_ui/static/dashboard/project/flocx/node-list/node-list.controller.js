@@ -26,13 +26,13 @@
     init();
 
     /**
-     * @description Open a modal that guids a user through creating an offer
+     * @description Open a modal that guides a user through creating an offer
      * @param {*} node The node data to be used as default values in the modal
      *
      * @returns {void}
      */
     function createOffer (node) {
-      // Open a modal that guides a user through creating an offer
+      // Open the modal
       createOfferService.createOffer(node)
         .then(init); // Refresh the nodes and offers
     }
@@ -152,7 +152,7 @@
         status = offer.status.charAt(0).toUpperCase() + offer.status.slice(1);
       }
       if (offer.end_time) {
-        expires = utcToLocal(offer.end_time, 'medium');
+        expires = utcToLocal(offer.end_time, 'short');
       }
 
       if (offer.server_config && offer.server_config.properties) {

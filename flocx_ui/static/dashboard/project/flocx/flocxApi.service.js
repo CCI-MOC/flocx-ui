@@ -19,6 +19,8 @@
     var service = {
       getOffers: getOffers,
       createOffer: createOffer,
+      getBids: getBids,
+      createBid: createBid,
       getContracts: getContracts
     };
 
@@ -42,6 +44,29 @@
      */
     function createOffer(offer) {
       return apiService.post('/api/flocx/offer/', offer)
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    /**
+     * @description Get a list of bids
+     * @returns {promise} Promise containing a list of bids
+     */
+    function getBids() {
+      return apiService.get('/api/flocx/bid/')
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    /**
+     * @description Create a bid
+     * @param {*} bid The bid data to be used when creating the bid
+     * @returns {promise} Promise containing the created offer
+     */
+    function createBid(bid) {
+      return apiService.post('/api/flocx/bid/', bid)
         .then(function (response) {
           return response.data;
         });
