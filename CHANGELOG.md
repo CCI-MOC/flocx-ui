@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.2] - 2019-08-12
+
 ### Changed
 
 - The code that handles extracting data from an offer's server config so that details are correctly displayed instead of ?'s (#19)
