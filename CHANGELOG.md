@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - The default offer start and end times to be at the closest hour in the past instead of the next closest hour (#20).
+- "Create offer" modal now prohibits users from editing unused Ironic node properties (#17).
 
 ### Fixed
 
