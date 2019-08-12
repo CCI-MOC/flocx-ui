@@ -7,12 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The code that handles extracting data from an offer's server config so that details are correctly displayed instead of ?'s (#19)
+
 ## [1.2.1] - 2019-08-12
 
 ### Changed
 
-- The default offer start and end times to be at the closest hour in the past instead of the next closest hour (#20).
-- "Create offer" modal now prohibits users from editing unused Ironic node properties (#17).
+- The default offer start and end times to be at the closest hour in the past instead of the next closest hour (#20)
+- "Create offer" modal now prohibits users from editing unused Ironic node properties (#17)
 
 ### Fixed
 

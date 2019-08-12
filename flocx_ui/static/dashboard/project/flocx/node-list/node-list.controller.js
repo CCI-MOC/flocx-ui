@@ -87,7 +87,16 @@
 
       ctrl.offers.forEach(function (offer) {
         var convertedOffer = convertOffer(offer);
-        merged[convertedOffer.uuid] = convertedOffer;
+
+        if (typeof merged[convertedOffer.uuid] !== 'undefined') {
+          var existingNode = merged[convertedOffer.uuid];
+          merged[convertedOffer.uuid] = convertedOffer;
+          merged[convertedOffer.uuid].cpus = existingNode.cpus;
+          merged[convertedOffer.uuid].ram = existingNode.ram;
+          merged[convertedOffer.uuid].disk = existingNode.disk;
+        } else {
+          merged[convertedOffer.uuid] = convertedOffer;
+        }
       });
 
       ctrl.merged = Object.values(merged);
@@ -105,35 +114,52 @@
     }
 
     /**
+     * @description Extract certain information from a properties object
+     * @param {*} properties The properties object on the offer or node
+     *
+     * @returns {*} An object containing the extracted properties
+     *          (cpus, memory gigabytes, and disk gigabytes)
+     */
+    function interpretProperties (properties) {
+      var cpus, memory, disk;
+
+      if (properties) {
+        if (properties.cpus) {
+          cpus = properties.cpus;
+        }
+        if (properties.memory_mb) {
+          var memoryGigbaytes = roundTo(+properties.memory_mb / 1000, 0.5);
+          memory = memoryGigbaytes + ' GB';
+        }
+        if (properties.local_gb) {
+          disk = properties.local_gb + ' GB';
+        }
+      }
+
+      return {
+        cpus: cpus,
+        memory: memory,
+        disk: disk
+      };
+    }
+
+    /**
      * @description Converts a node object into a shared data structure to be displayed
      * @param {object} node The given node
      *
      * @returns {object} The transformed object
      */
     function convertNode (node) {
-      var cpus, memory, disk;
-
-      if (node.properties) {
-        if (node.properties.cpus) {
-          cpus = node.properties.cpus;
-        }
-        if (node.properties.memory_mb) {
-          var memoryGigbaytes = roundTo(+node.properties.memory_mb / 1000, 0.5);
-          memory = memoryGigbaytes + ' GB';
-        }
-        if (node.properties.local_gb) {
-          disk = node.properties.local_gb + ' GB';
-        }
-      }
+      var properties = interpretProperties(node.properties);
 
       return {
         type: 'node',
         name: node.uuid,
         uuid: node.uuid,
         status: 'Not offered',
-        cpus: cpus || '?',
-        ram: memory || '?',
-        disk: disk || '?',
+        cpus: properties.cpus || '?',
+        ram: properties.memory || '?',
+        disk: properties.disk || '?',
         expires: 'N/A',
         properties: node.properties
       };
@@ -146,7 +172,7 @@
      * @returns {object} The transformed object
      */
     function convertOffer (offer) { // eslint-disable-line complexity
-      var status, cpus, memory, disk, expires;
+      var status, expires;
 
       if (offer.status) {
         status = offer.status.charAt(0).toUpperCase() + offer.status.slice(1);
@@ -155,35 +181,16 @@
         expires = utcToLocal(offer.end_time, 'short');
       }
 
-      if (offer.server_config && offer.server_config.properties) {
-        var properties = offer.server_config.properties;
-        if (properties.cpu_physical_count) {
-          cpus = properties.cpu_physical_count;
-        }
-        if (properties.memory_gb) {
-          memory = properties.memory_gb + ' GB';
-        }
-        var disks = properties.disks;
-        if (disks && disks.length > 0) {
-          disk = disks.reduce(function (sum, disk) {
-            if (disk.size_gb) {
-              sum += disk.size_gb;
-              return sum;
-            }
-            return 0;
-          }, 0);
-          disk += ' GB';
-        }
-      }
+      var properties = interpretProperties(offer.server_config);
 
       return {
         type: 'offer',
         name: offer.server_id,
         uuid: offer.server_id,
         status: status || '?',
-        cpus: cpus || '?',
-        ram: memory || '?',
-        disk: disk || '?',
+        cpus: properties.cpus || '?',
+        ram: properties.memory || '?',
+        disk: properties.disk || '?',
         expires: expires || '?'
       };
     }
