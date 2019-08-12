@@ -32,7 +32,7 @@
     var ctrl = this;
 
     // Import filters from date.filter.js
-    var nextHourString = $filter('nextHourString');
+    var lastHourString = $filter('lastHourString');
     var convertToDatetime = $filter('convertToDatetime');
 
     var localeOptions = {
@@ -45,8 +45,8 @@
     var endDate = new Date(endDateMs);
     var todayString = today.toLocaleDateString(undefined, localeOptions);
     var endDateString = endDate.toLocaleDateString(undefined, localeOptions);
-    var todayTimeString = nextHourString(today);
-    var endDateTimeString = nextHourString(endDate);
+    var todayTimeString = lastHourString(today);
+    var endDateTimeString = lastHourString(endDate);
     var config = node.properties;
 
     ctrl.name = node.name || node.uuid;
