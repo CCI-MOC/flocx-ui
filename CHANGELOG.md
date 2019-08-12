@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2019-08-12
+
 ### Fixed
 
 - A typo in the `setup.cfg` file (#24)
