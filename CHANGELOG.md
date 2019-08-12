@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.1] - 2019-08-12
 
+### Changed
+
+- The default offer start and end times to be at the closest hour in the past instead of the next closest hour (#20).
+
 ### Fixed
 
 - A typo in the `setup.cfg` file (#24)
