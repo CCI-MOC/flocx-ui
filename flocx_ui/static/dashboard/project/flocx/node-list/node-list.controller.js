@@ -55,7 +55,7 @@
     }
 
     function onGetOffers (offers) {
-      ctrl.offers = offers;
+      ctrl.offers = offers.filter(offer => offer.status == 'available');
     }
 
     /**
