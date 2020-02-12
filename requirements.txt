@@ -9,7 +9,7 @@
 # PBR should always appear first
 pbr>=2.0.0
 # Other flocx-ui requirements
-Django==2.0.13
+Django==2.2.10
 horizon>=15.1.0
 ironic-ui>=3.4.0
 python-dotenv>=0.10.3
